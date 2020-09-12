@@ -5,6 +5,7 @@
 //  }
  
 //  function signUpButtonPressed(){
+      // firebase.storage().ref('products/'+file.name)
 //    firebase.storage().ref('products/'+'product1.jpg').put(file).then(function(){
 //     console.log("successfully uploaded") 
 //    }).catch(error => { 
@@ -34,18 +35,6 @@ var db = firebase.firestore();
 db.collection("products").get().then((snapshot) => {
   snapshot.forEach((doc) => {
 
-    // firebase.auth().onAuthStateChanged(user => {
-    //   console.log("HI")
-    //   if(user){
-    //     firebase.storage().ref('products/'+'product1.jpg').getDownloadURL().then((imgUrl)=> {
-    //      var img = document.getElementById(doc.data().name.replace(/"/g, ''));
-    //      img.src= imgUrl
-    //      console.log(doc.data().name.replace(/"/g, ''))
-    //     }).catch((err)=>{
-    //       console.log(err)
-    //     })
-    //   }
-    // })
     let object = doc.data();
     let id_name = doc.data().name.replace(/"/g, '')
     console.log(object)
@@ -53,10 +42,11 @@ db.collection("products").get().then((snapshot) => {
     
     document.getElementById('product-list').innerHTML+=`
     <div class="product-item" id="${doc.id}" onclick="viewDetails(this.id)"> 
-    <img src="" id="${doc.data().name.replace(/"/g, '')}">
-    <div>${doc.data().name}</div>
-    <div class="product-line"></div>
-    <div>₱  ${parseFloat(doc.data().price6x6).toFixed(2)} to ${parseFloat(doc.data().price10x12).toFixed(2)}</div></div>`;  
+      <img src="" id="${doc.data().name.replace(/"/g, '')}" class="image_list">
+      <div>${doc.data().name}</div>
+      <div class="product-line"></div>
+      <div>₱  ${parseFloat(doc.data().price6x6).toFixed(2)} to ${parseFloat(doc.data().price10x12).toFixed(2)}</div>
+    </div>`;  
     // console.log(doc.data());
     
 
@@ -64,15 +54,21 @@ db.collection("products").get().then((snapshot) => {
       // let id_name = doc.data().name.replace(/"/g, '')
       // console.log('products/'+doc.id+'.jpg')
       if(user){
-        firebase.storage().ref('products/'+ 'product1.jpg').getDownloadURL().then((imgUrl)=> {
+        console.log('products/'+doc.id+'.jpg')
+        firebase.storage().ref('products/'+doc.id+'.jpg').getDownloadURL().then((imgUrl)=> {
          var img = document.getElementById(id_name);
          img.src= imgUrl
-        //  console.log(doc.data().name.replace(/"/g, ''))
         }).catch((err)=>{
-          console.log(err)
+          firebase.storage().ref('products/'+doc.id+'.JPG').getDownloadURL().then((imgUrl)=> {
+            var img = document.getElementById(id_name);
+            img.src= imgUrl
+           })
+           //COMMENTED BECAUSE USED CATCH FOR, DIFFERENT KIND OF IMAGE TYPES
+          // console.log(err)
         })
       }
     })
+
   });
 });
 
@@ -81,18 +77,59 @@ function viewDetails(id){
 
   $("#product-main").hide();
   $("#product-details").show();
-
+  
   db.collection("products").doc(id).get().then(function(doc){
-    console.log(doc)
+    let id_name = doc.data().name.replace(/"/g, '') + "_detail"
+    console.log(id_name)
+
     document.getElementById('specific-product').innerHTML+=`
     <div class="specific-product-item" id="${id}"> 
-      <div>Ingredients: ${doc.data().ingredients}</div>
-      <div>${doc.data().description}</div>
-      <div>${doc.data().name}</div>
-      <div>6x6 inches ₱  ${parseFloat(doc.data().price6x6).toFixed(2)} </div>
-      <div>7x8 inches ₱  ${parseFloat(doc.data().price7x8).toFixed(2)} </div>
-      <div>10x12 inches ₱ ${parseFloat(doc.data().price10x12).toFixed(2)}</div>
+
+      <div class="product-detail-left">
+        <img src="" id="${id_name}" class="image_detail">
+        <div class="ingredients">Ingredients: ${doc.data().ingredients}</div>
+        <div class="product-detail-line"></div>
+        <div class="description">${doc.data().description}</div>
+      </div>
+
+      <div class="product-detail-right">
+        <div class="name">${doc.data().name}</div>
+        <div class="size-header">Size</div>
+        <div class="price">
+          <div class="size">6x6 inches</div>
+          <div class="price6x6">₱  ${parseFloat(doc.data().price6x6).toFixed(2)} </div>
+        </div>
+
+        <div class="price">
+          <div class="size">7x8 inches</div>
+          <div class="price7x8">₱  ${parseFloat(doc.data().price7x8).toFixed(2)} </div>
+        </div>
+
+        <div class="price">
+          <div class="size">10x12 inches</div>
+          <div class="price10x12">₱ ${parseFloat(doc.data().price10x12).toFixed(2)}</div>
+        </div>  
+        
+      </div>
+
     </div>`;  
+    
+    firebase.auth().onAuthStateChanged(user => {
+      if(user){
+        console.log('products/'+id+'.jpg')
+        firebase.storage().ref('products/'+id+'.jpg').getDownloadURL().then((imgUrl)=> {
+         var img = document.getElementById(id_name);
+         img.src= imgUrl
+        }).catch((err)=>{
+          firebase.storage().ref('products/'+id+'.JPG').getDownloadURL().then((imgUrl)=> {
+            var img = document.getElementById(id_name);
+            img.src= imgUrl
+           })
+           //COMMENTED BECAUSE USED CATCH FOR, DIFFERENT KIND OF IMAGE TYPES
+          // console.log(err)
+        })
+      }
+    })
   })
 
 
