@@ -28,17 +28,17 @@
         <div id="register_template">
             <h1>REGISTER</h1>
             <div class="title-line-register"></div>
-            <form class="registration-form">
-                <label>First name</label> <input class="input-register" type="text" placeholder="Your first name" pattern="[a-zA-Z]+" oninvalid="this.setCustomValidity('Please enter this field only with letters')" required> <br>
-                <label>Last name</label> <input class="input-register" type="test" placeholder="Your last name" pattern="[a-zA-Z]+" oninvalid="this.setCustomValidity('Please enter this field only with letters')" required> <br>
-                <label>Mobile number</label> <input class="input-register" type="tel" placeholder="Your contact number (start with 639)" pattern="[6]{1}[3]{1}[9]{1}[0-9]{9}" oninvalid="this.setCustomValidity('Contact number should start with 639 followed by 9 digit number')" required> <br>
-                <label>Email</label> <input class="input-register" type="email" placeholder="Your email address" required> <br>
-                <label>Password</label> <input class="input-register" type="password" placeholder="Your password" minlength="8" required> <br>
-                <label>Street Address</label> <input class="input-register" type="text" placeholder="Your street address" required> <br>
-                <label>Building, Floor</label> <input class="input-register" type="text" placeholder="Your building and floor" required> <br>
-                <label>City</label> <input class="input-register" type="text" placeholder="Your city" required>
+            <form class="registration-form" id="register-user">
+                <label>First name</label> <input class="input-register" id="registerFname" type="text" placeholder="Your first name" required> <br>
+                <label>Last name</label> <input class="input-register" id="registerLname" type="test" placeholder="Your last name" required> <br>
+                <label>Mobile number</label> <input class="input-register" id="registerMob" type="tel" placeholder="Your contact number (start with 639)" pattern="[6]{1}[3]{1}[9]{1}[0-9]{9}" oninvalid="this.setCustomValidity('Contact number should start with 639 followed by 9 digit number')" required> <br>
+                <label>Email</label> <input class="input-register" id="registerEmail" type="email" placeholder="Your email address" required> <br>
+                <label>Password</label> <input class="input-register" id="registerPass" type="password" placeholder="Your password" minlength="8" required> <br>
+                <label>Street Address</label> <input class="input-register" id="registerStreet" type="text" placeholder="Your street address" required> <br>
+                <label>Building, Floor</label> <input class="input-register" id="registerBldg" type="text" placeholder="Your building and floor" required> <br>
+                <label>City</label> <input class="input-register" id="registerCity" type="text" placeholder="Your city" required>
 
-                <input class="register-btn" type="submit" value="SUBMIT"  onclick="register()">
+                <input class="register-btn" id="register-user-btn"type="submit" value="SUBMIT">
             </form>
             
         </div>

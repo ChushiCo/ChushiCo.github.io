@@ -279,6 +279,25 @@ form .register-btn{
    
 }
 
+/* successful register template */
+form .input-register-success{
+    margin: 10px 20px;
+    font-size: 38px;
+    padding: 5px 15px;
+    width: 72%;
+}
+
+form .register-success-banner{
+    /* height: auto; */
+    width: 60%;
+    margin: 0  auto;
+    text-align: center;
+    padding: 10px;
+    background: #ffddb6;
+    border-radius: 5px;
+    border-left: 10px solid #ff8a00;
+    border-right: 10px solid #ff8a00;
+}
 
 /* products template */
 #product-main{
