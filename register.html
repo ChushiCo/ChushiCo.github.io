@@ -6,6 +6,7 @@
         <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
         <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
         <link rel = "stylesheet" type = "text/css" href= "styles.css">
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
     </head>
 
@@ -27,21 +28,31 @@
         <div id="register_template">
             <h1>REGISTER</h1>
             <div class="title-line-register"></div>
-            <form class="registration-form">
-                <label>First name</label> <input class="input-register" type="text" placeholder="Your first name" pattern="[a-zA-Z]+" oninvalid="this.setCustomValidity('Please enter this field only with letters')" required> <br>
-                <label>Last name</label> <input class="input-register" type="test" placeholder="Your last name" pattern="[a-zA-Z]+" oninvalid="this.setCustomValidity('Please enter this field only with letters')" required> <br>
-                <label>Mobile number</label> <input class="input-register" type="tel" placeholder="Your contact number (start with 639)" pattern="[6]{1}[3]{1}[9]{1}[0-9]{9}" oninvalid="this.setCustomValidity('Contact number should start with 639 followed by 9 digit number')" required> <br>
-                <label>Email</label> <input class="input-register" type="email" placeholder="Your email address" required> <br>
-                <label>Password</label> <input class="input-register" type="password" placeholder="Your password" required> <br>
-                <label>Street Address</label> <input class="input-register" type="password" placeholder="Your street address" required> <br>
-                <label>Building, Floor</label> <input class="input-register" type="password" placeholder="Your building and floor" required> <br>
-                <label>City</label> <input class="input-register" type="password" placeholder="Your city" required>
+            <form class="registration-form" id="register-user">
+                <label>First name</label> <input class="input-register" id="registerFname" type="text" placeholder="Your first name" required> <br>
+                <label>Last name</label> <input class="input-register" id="registerLname" type="test" placeholder="Your last name" required> <br>
+                <label>Mobile number</label> <input class="input-register" id="registerMob" type="tel" placeholder="Your contact number (start with 639)" pattern="[6]{1}[3]{1}[9]{1}[0-9]{9}" oninvalid="this.setCustomValidity('Contact number should start with 639 followed by 9 digit number')" required> <br>
+                <label>Email</label> <input class="input-register" id="registerEmail" type="email" placeholder="Your email address" required> <br>
+                <label>Password</label> <input class="input-register" id="registerPass" type="password" placeholder="Your password" minlength="8" required> <br>
+                <label>Street Address</label> <input class="input-register" id="registerStreet" type="text" placeholder="Your street address" required> <br>
+                <label>Building, Floor</label> <input class="input-register" id="registerBldg" type="text" placeholder="Your building and floor" required> <br>
+                <label>City</label> <input class="input-register" id="registerCity" type="text" placeholder="Your city" required>
 
-                <input class="register-btn" type="submit" value="SUBMIT">
+                <input class="register-btn" id="register-user-btn"type="submit" value="SUBMIT">
             </form>
             
         </div>
         
+
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
+
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+            https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
+
+        <script src="register.js"></script>
 
     </body>
 </html>
