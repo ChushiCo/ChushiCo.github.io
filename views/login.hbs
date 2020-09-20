@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <title>Login</title>
+        <meta content="text/htmlcharset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+        <link rel = "stylesheet" type = "text/css" href= "styles.css">
+        
+    </head>
+
+    <body>
+        <header>
+            <div id="brand">
+                <img id="logo" src="img/logo.png">
+                <span id="name">CHUSHI</span>
+            </div>
+
+            <div id="tabs1">
+                <div><a href="home" method="get">HOME</a></div>
+                <div><a href="catalog" method="get">PRODUCTS</a></div>
+                <div><a href="about" method="get">ABOUT</a></div>
+                <div><a class="selected" href="login" method="get">LOGIN</a></div>
+            </div>
+        </header>
+
+        <div id="login_template">
+            <h1>LOGIN</h1>
+            <div class="title-line"></div>
+
+            <form method="post" action="login">
+
+                <label>Email <p>*</p></label> <input class="input-box" type="email" name="email" placeholder="Your email address" required> <br>
+                <label>Password <p>*</p></label> <input class="input-box" type="password" name="password" placeholder="Your password"required>
+
+                <input class="login-btn" type="submit" value="LOGIN">
+
+                <p>Don’t have an account? You can register by clicking <a href="register-page" method="get">here</a></p>
+            </form>
+            
+        </div>
+        
+
+    </body>
+</html>
