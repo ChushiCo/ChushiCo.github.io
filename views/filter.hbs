@@ -1,0 +1,258 @@
+<html>
+    <head>
+        <title>View Products</title>
+        <meta content="text/htmlcharset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+        <link rel = "stylesheet" type = "text/css" href= "styles.css">
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    </head>
+
+    <body>
+        <header>
+            <div id="brand">
+                <img id="logo" src="img/logo.png">
+                <span id="name">CHUSHI</span>
+            </div>
+
+            <div id="tabs1">
+                <div><a href="home" method="get">HOME</a></div>
+                <div><a  class="selected" href="catalog" method="get">PRODUCTS</a></div>
+                <div><a href="about" method="get">ABOUT</a></div>
+                <div><a href="login" method="get">LOGIN</a></div>
+            </div> 
+        </header>
+
+        <main id="product-main">
+            <div id="filter_bar">
+                <form id="filter" method="post" action="filter">
+
+                    {{#if filter}}
+                        <div>
+                            <span id = "filter-heading">FILTER</span>
+                            <div class="line"></div>
+
+                            {{#if_equal filter "new"}}
+                                <label class="checkmark"><input class="filter" type="radio" name="filter" value="new" checked> New Products</label>
+                            {{else}}
+                                <label class="checkmark"><input class="filter" type="radio" name="filter" value="new"> New Products</label>
+                            {{/if_equal}}
+
+                            {{#if_equal filter "popular"}}
+                                <label class="checkmark"><input class="filter" type="radio" name="filter" value="popular" checked> Popularity</label>
+                            {{else}}
+                                <label class="checkmark"><input class="filter" type="radio" name="filter" value="popular"> Popularity</label>
+                            {{/if_equal}}
+   
+                        </div>
+
+                        <div class="category-heading">
+                            <div class="half-line-price"></div>
+                            <span class = "category-title">Price</span>
+                            <div class="half-line-price"></div>
+
+                            {{#if_equal filter "low"}}
+                                <label class="checkmark"><input  class="filter" type="radio" name="filter" value="low" checked> Lowest</label>
+                            {{else}}
+                                <label class="checkmark"><input  class="filter" type="radio" name="filter" value="low"> Lowest</label>
+                            {{/if_equal}}
+
+                            {{#if_equal filter "high"}}
+                                <label class="checkmark"><input class="filter" type="radio" name="filter" value="high" checked> Highest</label>
+                            {{else}}
+                                <label class="checkmark"><input class="filter" type="radio" name="filter" value="high"> Highest</label>
+                            {{/if_equal}}
+ 
+                        </div>
+
+                        <div class="category-heading">
+                            <div class="half-line-size"></div>
+                            <span class = "category-title"> Size </span>
+                            <div class="half-line-size"></div>
+
+                            {{#if_equal filter "6x6"}}
+                                <label class="checkmark"><input class="filter" type="radio" name="filter" value="6x6" checked> 6x6 inches</label>
+                            {{else}}
+                                <label class="checkmark"><input class="filter" type="radio" name="filter" value="6x6"> 6x6 inches</label>
+                            {{/if_equal}}
+
+                            {{#if_equal filter "7x8"}}
+                                <label class="checkmark"><input class="filter" type="radio" name="filter" value="7x8" checked> 7x8 inches</label>
+                            {{else}}
+                                <label class="checkmark"><input class="filter" type="radio" name="filter" value="7x8"> 7x8 inches</label>
+                            {{/if_equal}}
+
+                            {{#if_equal filter "10x12"}}
+                                <label class="checkmark"><input class="filter" type="radio" name="filter" value="10x12" checked> 10x12 inches</label>
+                            {{else}}
+                                <label class="checkmark"><input class="filter" type="radio" name="filter" value="10x12"> 10x12 inches</label>
+                            {{/if_equal}}                
+                            
+                        </div>
+                    {{/if}}
+
+                </form>
+            </div>
+    
+            <div id="header-title"> 
+                <span id="title-name">SUSHI BAKES</span>
+                
+                <div class="search-container">
+                    <div class="search-box">
+
+                        {{#if_equal filter "new"}}
+                            <input type="text" id="searchInput" class="search-txt" placeholder="Search for shushi bakes"/>
+                            <input type="hidden" id="searchInputPopular" class="search-txt" placeholder="Search for shushi bakes"/>
+                            <input type="hidden" id="searchInputLow" class="search-txt" placeholder="Search for shushi bakes"/>
+                            <input type="hidden" id="searchInputHigh" class="search-txt" placeholder="Search for shushi bakes"/> 
+                            <input type="hidden" id="searchInput6x6" class="search-txt" placeholder="Search for shushi bakes"/>
+                            <input type="hidden" id="searchInput7x8" class="search-txt" placeholder="Search for shushi bakes"/>
+                            <input type="hidden" id="searchInput10x12" class="search-txt" placeholder="Search for shushi bakes"/> 
+                        {{/if_equal}}
+
+                        {{#if_equal filter "popular"}}
+                            <input type="hidden" id="searchInput" class="search-txt" placeholder="Search for shushi bakes"/>
+                            <input type="text" id="searchInputPopular" class="search-txt" placeholder="Search for shushi bakes"/>
+                            <input type="hidden" id="searchInputLow" class="search-txt" placeholder="Search for shushi bakes"/>
+                            <input type="hidden" id="searchInputHigh" class="search-txt" placeholder="Search for shushi bakes"/>
+                            <input type="hidden" id="searchInput6x6" class="search-txt" placeholder="Search for shushi bakes"/>
+                            <input type="hidden" id="searchInput7x8" class="search-txt" placeholder="Search for shushi bakes"/>
+                            <input type="hidden" id="searchInput10x12" class="search-txt" placeholder="Search for shushi bakes"/>  
+                        {{/if_equal}}
+
+                        {{#if_equal filter "low"}}
+                            <input type="hidden" id="searchInput" class="search-txt" placeholder="Search for shushi bakes"/>
+                            <input type="hidden" id="searchInputPopular" class="search-txt" placeholder="Search for shushi bakes"/>
+                            <input type="text" id="searchInputLow" class="search-txt" placeholder="Search for shushi bakes"/>
+                            <input type="hidden" id="searchInputHigh" class="search-txt" placeholder="Search for shushi bakes"/>
+                            <input type="hidden" id="searchInput6x6" class="search-txt" placeholder="Search for shushi bakes"/>
+                            <input type="hidden" id="searchInput7x8" class="search-txt" placeholder="Search for shushi bakes"/>
+                            <input type="hidden" id="searchInput10x12" class="search-txt" placeholder="Search for shushi bakes"/>  
+                        {{/if_equal}}
+
+                        {{#if_equal filter "high"}}
+                            <input type="hidden" id="searchInput" class="search-txt" placeholder="Search for shushi bakes"/>
+                            <input type="hidden" id="searchInputPopular" class="search-txt" placeholder="Search for shushi bakes"/>
+                            <input type="hidden" id="searchInputLow" class="search-txt" placeholder="Search for shushi bakes"/>
+                            <input type="text" id="searchInputHigh" class="search-txt" placeholder="Search for shushi bakes"/> 
+                            <input type="hidden" id="searchInput6x6" class="search-txt" placeholder="Search for shushi bakes"/>
+                            <input type="hidden" id="searchInput7x8" class="search-txt" placeholder="Search for shushi bakes"/>
+                            <input type="hidden" id="searchInput10x12" class="search-txt" placeholder="Search for shushi bakes"/>    
+                        {{/if_equal}}
+
+                        {{#if_equal filter "6x6"}}
+                            <input type="hidden" id="searchInput" class="search-txt" placeholder="Search for shushi bakes"/>
+                            <input type="hidden" id="searchInputPopular" class="search-txt" placeholder="Search for shushi bakes"/>
+                            <input type="hidden" id="searchInputLow" class="search-txt" placeholder="Search for shushi bakes"/>
+                            <input type="hidden" id="searchInputHigh" class="search-txt" placeholder="Search for shushi bakes"/>
+                            <input type="text" id="searchInput6x6" class="search-txt" placeholder="Search for shushi bakes"/>
+                            <input type="hidden" id="searchInput7x8" class="search-txt" placeholder="Search for shushi bakes"/>
+                            <input type="hidden" id="searchInput10x12" class="search-txt" placeholder="Search for shushi bakes"/>
+                                 
+                        {{/if_equal}}
+
+                        {{#if_equal filter "7x8"}}
+                            <input type="hidden" id="searchInput" class="search-txt" placeholder="Search for shushi bakes"/>
+                            <input type="hidden" id="searchInputPopular" class="search-txt" placeholder="Search for shushi bakes"/>
+                            <input type="hidden" id="searchInputLow" class="search-txt" placeholder="Search for shushi bakes"/>
+                            <input type="hidden" id="searchInputHigh" class="search-txt" placeholder="Search for shushi bakes"/>
+                            <input type="hidden" id="searchInput6x6" class="search-txt" placeholder="Search for shushi bakes"/>
+                            <input type="text" id="searchInput7x8" class="search-txt" placeholder="Search for shushi bakes"/>
+                            <input type="hidden" id="searchInput10x12" class="search-txt" placeholder="Search for shushi bakes"/>
+                                 
+                        {{/if_equal}}
+
+                        {{#if_equal filter "10x12"}}
+                            <input type="hidden" id="searchInput" class="search-txt" placeholder="Search for shushi bakes"/>
+                            <input type="hidden" id="searchInputPopular" class="search-txt" placeholder="Search for shushi bakes"/>
+                            <input type="hidden" id="searchInputLow" class="search-txt" placeholder="Search for shushi bakes"/>
+                            <input type="hidden" id="searchInputHigh" class="search-txt" placeholder="Search for shushi bakes"/>
+                            <input type="hidden" id="searchInput6x6" class="search-txt" placeholder="Search for shushi bakes"/>
+                            <input type="hidden" id="searchInput7x8" class="search-txt" placeholder="Search for shushi bakes"/>
+                            <input type="text" id="searchInput10x12" class="search-txt" placeholder="Search for shushi bakes"/>
+                                 
+                        {{/if_equal}}
+
+
+
+                        <a class="search-btn">
+                            <i class="fas fa-search"></i> 
+                        </a>
+                    </div>
+                 </div>
+            </div>
+
+            {{#if_equal filter "new"}}
+                <div class="products">
+                    <div id="product-list"></div>
+                </div>
+            {{/if_equal}}
+
+            {{#if_equal filter "popular"}}
+                <div class="products">
+                    <div id="product-list-popular"></div>
+                </div>
+            {{/if_equal}}
+
+            {{#if_equal filter "low"}}
+                <div class="products">
+                    <div id="product-list-low"></div>
+                </div>
+            {{/if_equal}}
+
+            {{#if_equal filter "high"}}
+                <div class="products">
+                    <div id="product-list-high"></div>
+                </div>
+            {{/if_equal}}
+
+             {{#if_equal filter "6x6"}}
+                <div class="products">
+                    <div id="product-list-6x6"></div>
+                </div>
+            {{/if_equal}}
+
+            {{#if_equal filter "7x8"}}
+                <div class="products">
+                    <div id="product-list-7x8"></div>
+                </div>
+            {{/if_equal}}
+
+            {{#if_equal filter "10x12"}}
+                <div class="products">
+                    <div id="product-list-10x12"></div>
+                </div>
+            {{/if_equal}}
+
+            
+
+
+            
+        </main>
+
+        <main id="product-details">
+            <div id="specific-product"></div>
+        </main>
+        
+
+        
+
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
+
+        <!-- STORAGE VIDEO -->
+        <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-storage.js"></script>
+
+
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+            https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
+
+        <script src="filter.js"></script>
+
+
+    </body>
+</html>
