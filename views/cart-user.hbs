@@ -1,0 +1,127 @@
+<html>
+    <head>
+        <title>Welcome to Chushi!</title>
+        <meta content="text/htmlcharset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+        <link rel = "stylesheet" type = "text/css" href= "styles.css">
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    </head>
+
+    <body>
+        <header>
+            <div id="brand">
+                <img id="logo" src="img/logo.png">
+                <span id="name">CHUSHI</span>
+            </div>
+
+            <div id="tabs1">
+                <div><a href="home" method="get">HOME</a></div>
+                <div><a href="catalog" method="get">PRODUCTS</a></div>
+                <div><a href="ordertracker" method="get">ORDER TRACKER</a></div>
+                <div><a href="history" method="get">HISTORY</a></div>
+                <div><a class="selected" href="cart" method="get">CART</a></div>
+                <div><a href="myaccount" method="get">MY ACCOUNT</a></div>
+            </div>
+        </header>
+        
+        <main id="cart-main">
+            <div class="cart-header">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                <div class="cart-header-label">CART</div>
+            </div>
+
+            <div class="cart-item">
+                <div class="cart-item-header">
+                    <div class="cart-item-header-label" id="cart-label-item">Item</div>
+                    <div class="cart-item-header-label" id="cart-label-price">Price</div>
+                    <div class="cart-item-header-label" id="cart-label-quantity">Quantity</div>
+                    <div class="cart-item-header-label" id="cart-label-subtotal">Subtotal</div>
+                </div>
+
+                {{#unless cart}}
+                    <div class="cart-item-content">
+                       <div class="cart-content-item">No item in cart yet</div>
+                    </div>
+                {{/unless}}
+
+                {{#each cart}} 
+                    {{#if qty6x6}}
+                        <div class="cart-item-content">
+                            <div class="cart-content-item">{{name}} (6x6 inches)</div>
+                            <div class="cart-content-price">₱  {{price6x6}}</div>
+                            <div class="cart-content-quantity">{{qty6x6}}</div>
+                            <div class="cart-content-subtotal">₱  {{total6x6}}</div>
+                            <svg data-id={{@index}} class="cart-content-remove" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+                            {{!-- <form class="remove_item" action="removeitem" method="post">
+                                <input id= "" type="text" name="cartitem" value="{{this}}" style="display: none">
+                            </form> --}}
+                        </div>
+                    {{/if}}
+
+                    {{#if qty7x8}}
+                        <div class="cart-item-content">
+                            <div class="cart-content-item">{{name}} (7x8 inches)</div>
+                            <div class="cart-content-price">₱  {{price7x8}}</div>
+                            <div class="cart-content-quantity">{{qty7x8}}</div>
+                            <div class="cart-content-subtotal">₱  {{total7x8}}</div>
+                            <svg data-id={{@index}} class="cart-content-remove" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+                            {{!-- <form class="remove_item" action="removeitem" method="post">
+                                <input type="text" name="cartitem" value="{{this}}" style="display: none">
+                            </form> --}}
+                            
+                        </div>
+                    {{/if}}
+
+                    {{#if qty10x12}}
+                        <div class="cart-item-content">
+                            <div class="cart-content-item">{{name}} (10x12 inches)</div>
+                            <div class="cart-content-price">₱  {{price10x12}}</div>
+                            <div class="cart-content-quantity">{{qty10x12}}</div>
+                            <div class="cart-content-subtotal">₱  {{total10x12}}</div>
+                            <svg data-id={{@index}} class="cart-content-remove" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+                            {{!-- <form class="remove_item" action="removeitem" method="post">
+                                <input type="text" name="cartitem" value="{{this}}" style="display: none">
+                            </form> --}}
+                        </div>
+                    {{/if}}
+                {{/each}}
+
+                <form class="remove_item" action="removeitem" method="post">
+                    <input id= "delete_id" type="hidden" name="cartitem">
+                </form>
+                
+                
+            </div>
+
+            {{#if cart}}
+                {{#if subtotal}}
+                    <div class="cart-summary">
+                        <div class="cart-summary-header">Summary</div>
+                        
+                        <div class="cart-summary-main">
+                            <div class="cart-subtotal">
+                                <div class="cart-subtotal-header">Subtotal</div>
+                                <div class="cart-subtotal-price">₱ {{subtotal}}</div>
+                            </div>
+                            <div class="subtotal-line"></div>
+                            <div class="cart-order-total">
+                                <div class="cart-order-header">Order Total</div>
+                                <div class="cart-order-price">₱ {{subtotal}}</div>
+                            </div>
+                            <div class="checkout-button"><a href="">PROCEED TO CHECKOUT</a></div>
+                        </div>
+                        
+                    </div>
+                {{/if}}
+            {{/if}}
+            
+            
+
+        </main>
+
+        <script src="cart.js"></script>
+    </body>
+</html>

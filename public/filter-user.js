@@ -281,35 +281,60 @@ function viewDetails(id){
   
   db.collection("products").doc(id).get().then(function(doc){
     let id_name = doc.data().name.replace(/"/g, '') + "_detail"
-    // console.log(id_name)
+    let product_name = doc.data().name.replace(/"/g, '')
 
-    document.getElementById('specific-product').innerHTML+=`
-    <div class="specific-product-item" id="${id}"> 
+    document.getElementById('specific-product-user').innerHTML+=`
+    <div class="specific-product-item-user" id="${id}"> 
 
-      <div class="product-detail-left">
-        <img src="" id="${id_name}" class="image_detail">
-        <div class="ingredients">Ingredients: ${doc.data().ingredients}</div>
-        <div class="product-detail-line"></div>
-        <div class="description">${doc.data().description}</div>
+      <div class="product-detail-left-user">
+        <img src="" id="${id_name}" class="image_detail-user">
+        <div class="ingredients-user">Ingredients: ${doc.data().ingredients}</div>
+        <div class="product-detail-line-user"></div>
+        <div class="description-user">${doc.data().description}</div>
       </div>
 
-      <div class="product-detail-right">
-        <div class="name">${doc.data().name}</div>
-        <div class="size-header">Size</div>
-        <div class="price">
-          <div class="size">6x6 inches</div>
-          <div class="price6x6">₱  ${parseFloat(doc.data().price6x6).toFixed(2)} </div>
+      <div class="product-detail-right-user">
+        <div class="name-user">${doc.data().name}</div>
+
+        <div class="size-area-user">
+          <div class="size-header-user">Size</div>
+          <div class="price-user">
+            <div class="size-user">6x6 inches</div>
+            <div class="price6x6-user">₱  ${parseFloat(doc.data().price6x6).toFixed(2)} </div>
+          </div>
+
+          <div class="price-user">
+            <div class="size-user">7x8 inches</div>
+            <div class="price7x8-user">₱  ${parseFloat(doc.data().price7x8).toFixed(2)} </div>
+          </div>
+
+          <div class="price-user">
+            <div class="size-user">10x12 inches</div>
+            <div class="price10x12-user">₱ ${parseFloat(doc.data().price10x12).toFixed(2)}</div>
+          </div>  
         </div>
 
-        <div class="price">
-          <div class="size">7x8 inches</div>
-          <div class="price7x8">₱  ${parseFloat(doc.data().price7x8).toFixed(2)} </div>
+
+        <div class="quantity-area-user">
+          <div class="quantity-header-user">Quantity</div>
+          <div class="quantity-user">
+            <form id="quantitiy-cart" method="post" action="quantity-order">
+              <input class="quantity6x6-user" type="number" name="qty6x6" min="0" max="20" value="0">
+              <input class="quantity7x8-user" type="number" name="qty7x8" min="0" max="20" value="0">
+              <input class="quantity10x12-user" type="number" name="qty10x12" min="0" max="20" value="0">
+ 
+              <input type="hidden" name="product_name" value="${product_name}">
+              <input type="hidden" name="price6x6" value="${parseFloat(doc.data().price6x6).toFixed(2)}">
+              <input type="hidden" name="price7x8" value="${parseFloat(doc.data().price7x8).toFixed(2)}">
+              <input type="hidden" name="price10x12" value="${parseFloat(doc.data().price10x12).toFixed(2)}">
+            </form>
+          </div>
         </div>
 
-        <div class="price">
-          <div class="size">10x12 inches</div>
-          <div class="price10x12">₱ ${parseFloat(doc.data().price10x12).toFixed(2)}</div>
-        </div>  
+        <div class="add-to-cart-user" onclick="addToCart()">
+            <div class="add-cart-label">Add to cart</div>
+            <svg class="add-cart-icon" xmlns="http://www.w3.org/2000/svg" height="42" viewBox="0 0 24 24" width="42"><path d="M0 0h24v24H0zm18.31 6l-2.76 5z" fill="none"/><path d="M11 9h2V6h3V4h-3V1h-2v3H8v2h3v3zm-4 9c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zm-9.83-3.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.86-7.01L19.42 4h-.01l-1.1 2-2.76 5H8.53l-.13-.27L6.16 6l-.95-2-.94-2H1v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.13 0-.25-.11-.25-.25z"/></svg>
+        </div>
         
       </div>
 
@@ -519,6 +544,17 @@ $(document).ready(function(){
   })
 
 })
+
+// FOR ADD TO CART
+function addToCart(){
+  $(document).ready(function(){
+    console.log($("quantity6x6-user").val())
+    console.log($("quantity7x8-user").val())
+    console.log($("quantity10x12-user").val())
+    $("form#quantitiy-cart").submit()  
+  })
+
+}
 
 
 

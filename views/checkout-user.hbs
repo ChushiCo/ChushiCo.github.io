@@ -1,0 +1,86 @@
+<html>
+    <head>
+        <title>Welcome to Chushi!</title>
+        <meta content="text/htmlcharset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+        <link rel = "stylesheet" type = "text/css" href= "styles.css">
+
+    </head>
+
+    <body>
+        <header>
+            <div id="brand">
+                <img id="logo" src="img/logo.png">
+                <span id="name">CHUSHI</span>
+            </div>
+
+            <div id="tabs1">
+                <div><a href="home" method="get">HOME</a></div>
+                <div><a href="catalog" method="get">PRODUCTS</a></div>
+                <div><a href="ordertracker" method="get">ORDER TRACKER</a></div>
+                <div><a href="history" method="get">HISTORY</a></div>
+                <div><a class="selected" href="cart" method="get">CART</a></div>
+                <div><a href="myaccount" method="get">MY ACCOUNT</a></div>
+            </div>
+        </header>
+
+        <main id="checkout-cart">
+            <div class="checkout-header">CHECKOUT</div>
+
+            <div class="checkout-main">
+                <div class="checkout-address">
+                    <div class="checkout-address-header">Shipping Address</div>
+                    <div class="checkout-address-user">W.H. Taft Residences, Taft Ave, Malate, Room 38, Manila, 1004 Metro Manila
+
+                        <div class="checkout-new-address">+ New Address</div>
+                    </div>
+                </div>
+
+                <div class="checkout-payment">
+                    <div class="checkout-payment-header">Payment Method</div>
+                    <div class="checkout-payment-method">
+                        <form id="payment">
+                            <label class="checkmark-payment"><input class="payment" type="radio" name="payment" value="cod" checked> Cash on Delivery</label>
+                            <label class="checkmark-payment"><input class="payment" type="radio" name="payment" value="cod"> Credit Card(Visa/Mastercard)</label>
+                        </form>
+                        
+                    </div>
+                </div>
+
+                <div class="checkout-date">
+                    <div class="checkout-date-header">Delivery Date & Time</div>
+                    <div class="checkout-date-time">08/24/2020 4:00 PM</div>
+                </div>
+
+
+                <div class="order-summary">
+                    <div class="order-summary-header">Order Summary
+                        <div class="order-items">2 Items in Cart</div>
+                    </div>
+                    <div class="order-summary-main">
+                        <div class="order-item">Lotta Scallops (7x8 inches)</div>
+                        <div class="order-price">₱  658.00</div>
+                        <div class="order-quantity">Qty: 2</div>
+
+                        <div class="order-cart-subtotal-label">Cart Subtotal</div>
+                        <div class="order-cart-subtotal">₱  658.00</div>
+
+                        <div class="order-total">
+                            <div class="order-total-label">Order Total</div>
+                            <div class="order-total-price">₱  658.00</div>    
+                        </div>
+
+                        <div class="place-order">
+                            Place Order
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+
+    </body>
+</html>

@@ -44,21 +44,22 @@ hbs.registerHelper('if_equal', function(a, b, opts) {
 
 app.get("/", (req, res)=>{
 
-    if(req.session.email){
-        //user already signed in
-        if(login == 1){
-            res.render("home-user.hbs")
-        }
-        else if(login == 100){
-            res.render("home-admin.hbs")
-        }
-    }
+    // if(req.session.email){
+    //     //user already signed in
+    //     if(login == 1){
+    //         res.render("home-user.hbs")
+    //     }
+    //     else if(login == 100){
+    //         res.render("home-admin.hbs")
+    //     }
+    // }
 
-    else{
-        // the user has not registered or logged
-        res.render("index.hbs")
+    // else{
+    //     // the user has not registered or logged
+    //     res.render("index.hbs")
     
-    }
+    // }
+    res.render("home-user.hbs")
 })
 
 app.post("/register", urlencoder, (req,res)=>{
@@ -131,15 +132,13 @@ app.post("/login", urlencoder, (req,res)=>{
                 
                 if(doc.data().role == "Admin"){
                     login=100;
-                    console.log(doc.data().email)
-                    console.log(doc.data().password)
-                    console.log("login is"+login)
+                    // console.log(doc.data().email)
+                    // console.log(doc.data().password)
                 }
                 else{
                     login=1;
-                    console.log(doc.data().email)
-                    console.log(doc.data().password)
-                    console.log("login is"+login)
+                    // console.log(doc.data().email)
+                    // console.log(doc.data().password)
                 }       
             }
         }, (err)=>{
@@ -191,19 +190,21 @@ app.get("/home", (req, res)=>{
 
 app.get("/catalog", (req, res)=>{
 
-    if(req.session.email){
-        //user already signed in
-        if(login == 1){
-            res.render("products-user.hbs")
-        }
-        else if(login == 100){
-            // res.render("home-admin.hbs")
-        }
-    }
+    // if(req.session.email){
+    //     //user already signed in
+    //     if(login == 1){
+    //         res.render("products-user.hbs")
+    //     }
+    //     else if(login == 100){
+    //         // res.render("home-admin.hbs")
+    //     }
+    // }
     
-    else{
-        res.render("products.hbs")
-    }
+    // else{
+    //     res.render("products.hbs")
+    // }
+
+    res.render("products-user.hbs")
     
 })
 
@@ -224,26 +225,198 @@ app.get("/about", (req, res)=>{
 app.post("/filter", urlencoder, (req, res)=>{
 
     let filter = req.body.filter
-    console.log(filter)
+    // console.log(filter)
 
-    if(req.session.email){
-        if(login == 1){
-            console.log("FILTER" +login)
-            res.render("filter-user.hbs", {
-                filter:filter
-            })
-        }
-        else if(login == 100){
-            // res.render("home-admin.hbs")
-        }
-    }
+    // if(req.session.email){
+    //     if(login == 1){
+    //         console.log("FILTER" +login)
+    //         res.render("filter-user.hbs", {
+    //             filter:filter
+    //         })
+    //     }
+    //     else if(login == 100){
+    //         // res.render("home-admin.hbs")
+    //     }
+    // }
     
-    else{
-        res.render("filter.hbs", {
-            filter:filter
-        })
-    }  
+    // else{
+    //     res.render("filter.hbs", {
+    //         filter:filter
+    //     })
+    // }  
+
+    res.render("filter-user.hbs", {
+        filter:filter
+    })
+
 })
+
+app.post("/quantity-order", urlencoder, (req,res)=>{
+    let product_name = req.body.product_name
+    let price6x6 = req.body.price6x6
+    let price7x8 = req.body.price7x8
+    let price10x12 = req.body.price10x12
+    let qty6x6 = req.body.qty6x6
+    let qty7x8 = req.body.qty7x8
+    let qty10x12 = req.body.qty10x12
+    let item={}
+
+    let total6x6 = parseFloat(price6x6 * qty6x6).toFixed(2)
+    let total7x8 = parseFloat(price7x8 * qty7x8).toFixed(2)
+    let total10x12 = parseFloat(price10x12 * qty10x12).toFixed(2)
+    let subtotal = computeSubtotal(price6x6, price7x8, price10x12, qty6x6, qty7x8, qty10x12)
+
+    req.session.subtotal = subtotal
+
+
+     if(!req.session.cart){
+        req.session.cart = []
+    }
+
+    if((qty6x6>0) && (qty7x8>0) && (qty10x12>0)){
+
+        item = {
+            name: product_name,
+            price6x6: price6x6,
+            qty6x6: qty6x6,
+            total6x6: total6x6
+        }
+        req.session.cart.push(item)
+
+        item = {
+            name: product_name,
+            price7x8: price7x8,
+            qty7x8: qty7x8,
+            total7x8: total7x8
+        }
+        req.session.cart.push(item)
+
+        item = {
+            name: product_name,
+            price10x12: price10x12,
+            qty10x12: qty10x12,
+            total10x12: total10x12
+        }
+        req.session.cart.push(item)
+        console.log(req.session.cart)  
+ 
+        res.render("cart-user.hbs", {cart:req.session.cart, subtotal:req.session.subtotal})
+    }
+
+    else if((qty6x6>0) && (qty7x8>0) && (qty10x12==0)){
+
+        item = {
+            name: product_name,
+            price6x6: price6x6,
+            qty6x6: qty6x6,
+            total6x6: total6x6
+        }
+        req.session.cart.push(item)
+
+        item = {
+            name: product_name,
+            price7x8: price7x8,
+            qty7x8: qty7x8,
+            total7x8: total7x8
+        }
+        req.session.cart.push(item) 
+
+        res.render("cart-user.hbs", {cart:req.session.cart, subtotal:req.session.subtotal})
+    }
+
+    else if((qty6x6>0) && (qty7x8==0) && (qty10x12>0)){
+
+        item = {
+            name: product_name,
+            price6x6: price6x6,
+            qty6x6: qty6x6,
+            total6x6: total6x6
+        }
+        req.session.cart.push(item)
+
+        item = {
+            name: product_name,
+            price10x12: price10x12,
+            qty10x12: qty10x12,
+            total10x12: total10x12
+        }
+        req.session.cart.push(item)
+
+        res.render("cart-user.hbs", {cart:req.session.cart, subtotal:req.session.subtotal})
+    }
+
+    else if((qty6x6>0) && (qty7x8==0) && (qty10x12==0)){
+        item = {
+            name: product_name,
+            price6x6: price6x6,
+            qty6x6: qty6x6,
+            total6x6: total6x6
+        } 
+
+        req.session.cart.push(item)
+        res.render("cart-user.hbs", {cart:req.session.cart, subtotal:req.session.subtotal})
+    }
+
+    else if((qty6x6==0) && (qty7x8>0) && (qty10x12>0)){
+
+        item = {
+            name: product_name,
+            price7x8: price7x8,
+            qty7x8: qty7x8,
+            total7x8: total7x8
+        }
+        req.session.cart.push(item)
+
+        item = {
+            name: product_name,
+            price10x12: price10x12,
+            qty10x12: qty10x12,
+            total10x12: total10x12
+        }
+        req.session.cart.push(item) 
+
+        res.render("cart-user.hbs", {cart:req.session.cart, subtotal:req.session.subtotal})
+    }
+
+    else if((qty6x6==0) && (qty7x8>0) && (qty10x12==0)){
+        item = {
+            name: product_name,
+            price7x8: price7x8,
+            qty7x8: qty7x8,
+            total7x8: total7x8
+        } 
+
+        req.session.cart.push(item)
+        res.render("cart-user.hbs", {cart:req.session.cart, subtotal:req.session.subtotal})
+    }
+
+    else if((qty6x6==0) && (qty7x8==0) && (qty10x12>0)){
+        item = {
+            name: product_name,
+            price10x12: price10x12,
+            qty10x12: qty10x12,
+            total10x12: total10x12
+        }
+
+        req.session.cart.push(item)
+        res.render("cart-user.hbs", {cart:req.session.cart, subtotal:req.session.subtotal})
+    }
+    else{
+        // console.log(item)  
+        req.session.cart.push(item)
+        res.render("cart-user.hbs", {cart:req.session.cart, subtotal:req.session.subtotal})
+    }
+   
+})
+
+function computeSubtotal(price6x6, price7x8, price10x12, qty6x6, qty7x8, qty10x12){
+    let priceA = price6x6 * qty6x6
+    let priceB = price7x8 * qty7x8
+    let priceC = price10x12 * qty10x12
+    let subtotal = priceA + priceB + priceC;
+
+    return parseFloat(subtotal).toFixed(2)
+}
 
 app.get("/ordertracker", (req, res)=>{
     res.render("tracker-user.hbs")
@@ -254,7 +427,13 @@ app.get("/history", (req, res)=>{
 })
 
 app.get("/cart", (req, res)=>{
-    res.redirect("/")
+    res.render("cart-user.hbs", {cart:req.session.cart, subtotal:req.session.subtotal})
+})
+
+app.post("/removeitem", urlencoder, (req,res)=>{
+    // console.log(req.body.cartitem)
+    req.session.cart.splice(parseInt(req.body.cartitem, 10),1)
+    res.render("cart-user.hbs", {cart:req.session.cart, subtotal:req.session.subtotal})
 })
 
 app.get("/myaccount", (req, res)=>{
