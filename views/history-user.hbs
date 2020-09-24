@@ -29,13 +29,20 @@
         <main id="history-main">
             <div class="history-header">Purchase history</div>
 
-            <div class="history-order">
-                <div class="history-date">August 20, 2020</div>
-                <div class="history-number">Order number: 122600102599</div>
-                <div class="history-order-details">1x  Lotta Scallops (6x6 inches)</div>
-                <div class="history-payment">₱229.00 (Cash On Delivery)</div>
-                <div class="history-address">W.H. Taft Residences, Taft Ave, Malate, Room 38, Manila, 1004 Metro Manila</div>
-            </div>
+            {{#each history}}
+                <div class="history-order">
+                    <div class="history-date">{{date}}</div>
+                    <div class="history-number">Order number: {{number}}</div>
+                    <div class="history-order-details">{{order}}</div>
+                    <div class="history-payment">₱ {{payment}} ({{method}})</div>
+                    <div class="history-address">{{address}}</div>
+                </div>
+            {{/each}}
+
+            {{#unless history}}
+                <div class="no-history">No order history yet</div>
+            {{/unless}}
+            
         </main>
 
 

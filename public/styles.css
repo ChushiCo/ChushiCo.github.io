@@ -1097,29 +1097,49 @@ input[type=radio] {
     
 }
 
+.order-summary-list{
+    display: grid;
+    grid-template-columns: 78% 22%;
+    grid-template-rows: 40px 40px;
+    margin-bottom: 20px;
+}
+
 .order-item{
     display: inline-block;
+    grid-row: 1/2;
+    grid-column: 1/2;
 }
 
 .order-price{
     display: inline-block;
-    position: relative;
-    left: 30%;
+    grid-row: 1/2;
+    grid-column: 2/3;
+    text-align: center;
 }
 
 .order-quantity{
-    margin: 15px 0 40px;
+    margin: 5px 0 0;
+    grid-row: 2/3;
+    grid-column: 1/2;
+}
+
+.order-subtotal-list{
+    display: grid;
+    grid-template-columns: 81% 19%;
+    margin: 35px 0 10px;
 }
 
 .order-cart-subtotal-label{
     display: inline-block;
     margin-bottom: 25px;
+    grid-column: 1/2;
 }
 
 .order-cart-subtotal{
     display: inline-block;
-    position: relative;
-    left: 55%;
+    /* position: relative;
+    left: 55%; */
+    grid-column: 2/3;
 }
 
 .order-total{
@@ -1150,6 +1170,127 @@ input[type=radio] {
     margin-bottom: 20px;
     cursor: pointer;
 }
+
+/* CHECKOUT NEW ADDRESS MODAL */
+.modalAddress{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modalAddress-content{
+    background-color: #f4f4f4;
+    margin: 15% auto;
+    padding: 18px;
+    width: 55%;
+    box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2),
+     0 7px 20px 0 rgba(0,0,0,0.17);
+
+    animation-name: modalopenAddress;
+    animation-duration: 1s;
+}
+
+.modalAddress-header{
+	background: #FFC178;	
+ 	border-radius: 5px;
+    padding: 5px;
+    color: black;
+    display: grid;
+    grid-template-columns: 90% 10%;
+}
+
+.modalAddress-header h2{
+	display: inline-block;
+	position: relative;
+	top: 12px;
+	margin-left: 36%;
+}
+
+.address-closeBtn{
+  display: inline-block;
+  position: relative;
+  color: #000;
+  font-size: 55px;
+  margin-left: 29%;
+  line-height: normal;
+}
+
+.address-closeBtn:hover, .address-closeBtn:focus{
+  color: red;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.modalAddress-body{
+    padding: 10px 20px;
+}
+
+.modalAddress-footer{
+    color: white;
+    text-align: center;
+}
+
+#form-add-address{
+    margin: 0;
+}
+
+#form-add-address input{
+    padding: 5px;
+    width: 100%;
+    height: 50px;
+    font-size:24px;
+	font-family:sans-serif;
+	margin: 10px 0;
+}
+
+#form-add-address input:last-child{
+	margin: 10px 0 0;
+}
+
+#submit-address{
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #000;
+    font-size: 20px;
+    font-weight: bold;
+    background:#FFC178;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+
+    transition-duration:0.5s;
+    transition-timing-function:ease;
+    transition-property:all;
+  }
+
+#submit-address:hover{
+    background: #ff8a00;
+    color: #fff;
+  }
+
+@keyframes modalopenAddress{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+
 
 /* FOR ORDER TRACKER - USER */
 #tracker-main{
@@ -1309,6 +1450,15 @@ input[type=radio] {
     grid-row: 4/5;
     grid-column: 2/3;
 }
+
+.no-history{
+    border: 3px solid black;
+    font-size: 26px;
+    font-weight: bold;
+    padding: 15px;
+
+}
+
 
 /* FOR PROFILE - USER */
 #profile-main{

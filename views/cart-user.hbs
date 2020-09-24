@@ -53,7 +53,7 @@
                             <div class="cart-content-item">{{name}} (6x6 inches)</div>
                             <div class="cart-content-price">₱  {{price6x6}}</div>
                             <div class="cart-content-quantity">{{qty6x6}}</div>
-                            <div class="cart-content-subtotal">₱  {{total6x6}}</div>
+                            <div class="cart-content-subtotal">₱  {{total}}</div>
                             <svg data-id={{@index}} class="cart-content-remove" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
                             {{!-- <form class="remove_item" action="removeitem" method="post">
                                 <input id= "" type="text" name="cartitem" value="{{this}}" style="display: none">
@@ -66,7 +66,7 @@
                             <div class="cart-content-item">{{name}} (7x8 inches)</div>
                             <div class="cart-content-price">₱  {{price7x8}}</div>
                             <div class="cart-content-quantity">{{qty7x8}}</div>
-                            <div class="cart-content-subtotal">₱  {{total7x8}}</div>
+                            <div class="cart-content-subtotal">₱  {{total}}</div>
                             <svg data-id={{@index}} class="cart-content-remove" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
                             {{!-- <form class="remove_item" action="removeitem" method="post">
                                 <input type="text" name="cartitem" value="{{this}}" style="display: none">
@@ -80,7 +80,7 @@
                             <div class="cart-content-item">{{name}} (10x12 inches)</div>
                             <div class="cart-content-price">₱  {{price10x12}}</div>
                             <div class="cart-content-quantity">{{qty10x12}}</div>
-                            <div class="cart-content-subtotal">₱  {{total10x12}}</div>
+                            <div class="cart-content-subtotal">₱  {{total}}</div>
                             <svg data-id={{@index}} class="cart-content-remove" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
                             {{!-- <form class="remove_item" action="removeitem" method="post">
                                 <input type="text" name="cartitem" value="{{this}}" style="display: none">
@@ -111,7 +111,7 @@
                                 <div class="cart-order-header">Order Total</div>
                                 <div class="cart-order-price">₱ {{subtotal}}</div>
                             </div>
-                            <div class="checkout-button"><a href="">PROCEED TO CHECKOUT</a></div>
+                            <div class="checkout-button"><a href="checkout" method="get">PROCEED TO CHECKOUT</a></div>
                         </div>
                         
                     </div>

@@ -521,33 +521,6 @@ $(document).ready(function(){
 })
 
 
-
-
-// var newObject ={
-//     name: "Example",
-//     quantity: 4
-// }
-// db.collection("inventory").add(newObject).then(function(doc) {
-//     console.log("Document written with UID: ", doc.id);
-// })
-// .catch(function(error) {
-//     console.error("Error adding document: ", error);
-// });
-
-//   db.collection("others").get().then((snapshot) => {
-//     snapshot.forEach((doc) => {
-//       document.getElementById('intro').innerHTML+=`${doc.data().value}`;
-//     });
-//   });
-
-// db.collection("inventory").doc("dIKmVJBYaDJRWOXjU6u5").delete().then(function(){
-//    console.log("Item deleted");
-// })
-// .catch(function(error){
-//    console.log("Error in deleting item :"+errpr);
-// });
-
-
   var email = "karl_david@dlsu.edu.ph";
   var password = "abcd1234";
 

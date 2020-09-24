@@ -32,7 +32,7 @@
             <div class="checkout-main">
                 <div class="checkout-address">
                     <div class="checkout-address-header">Shipping Address</div>
-                    <div class="checkout-address-user">W.H. Taft Residences, Taft Ave, Malate, Room 38, Manila, 1004 Metro Manila
+                    <div class="checkout-address-user">{{street}}, {{bldg}}, {{city}}
 
                         <div class="checkout-new-address">+ New Address</div>
                     </div>
@@ -51,25 +51,55 @@
 
                 <div class="checkout-date">
                     <div class="checkout-date-header">Delivery Date & Time</div>
-                    <div class="checkout-date-time">08/24/2020 4:00 PM</div>
+                    <div class="checkout-date-time">{{date}}</div>
                 </div>
 
 
                 <div class="order-summary">
-                    <div class="order-summary-header">Order Summary
-                        <div class="order-items">2 Items in Cart</div>
-                    </div>
-                    <div class="order-summary-main">
-                        <div class="order-item">Lotta Scallops (7x8 inches)</div>
-                        <div class="order-price">₱  658.00</div>
-                        <div class="order-quantity">Qty: 2</div>
+                    {{#if quantity}}
+                        <div class="order-summary-header">Order Summary
+                            <div class="order-items">{{quantity}} Item(s) in Cart</div>
+                        </div>
+                    {{/if}}
+                    
 
-                        <div class="order-cart-subtotal-label">Cart Subtotal</div>
-                        <div class="order-cart-subtotal">₱  658.00</div>
+                    <div class="order-summary-main">
+
+                        {{#each order}}
+                            {{#if qty6x6}}
+                                <div class="order-summary-list">
+                                    <div class="order-item">{{name}} (6x6 inches)</div>
+                                    <div class="order-price">₱  {{price6x6}}</div>
+                                    <div class="order-quantity">Qty: {{qty6x6}}</div>
+                                </div>
+                            {{/if}}
+
+                            {{#if qty7x8}}
+                                <div class="order-summary-list">
+                                    <div class="order-item">{{name}} (7x8 inches)</div>
+                                    <div class="order-price">₱  {{price7x8}}</div>
+                                    <div class="order-quantity">Qty: {{qty7x8}}</div>
+                                </div>
+                            {{/if}}
+
+                            {{#if qty10x12}}
+                                <div class="order-summary-list">
+                                    <div class="order-item">{{name}} (10x12 inches)</div>
+                                    <div class="order-price">₱  {{price10x12}}</div>
+                                    <div class="order-quantity">Qty: {{qty10x12}}</div>
+                                </div>
+                            {{/if}}
+                        {{/each}}
+                        
+                        <div class="order-subtotal-list">
+                            <div class="order-cart-subtotal-label">Cart Subtotal</div>
+                            <div class="order-cart-subtotal">₱  {{subtotal}}</div>
+                        </div>
+
 
                         <div class="order-total">
                             <div class="order-total-label">Order Total</div>
-                            <div class="order-total-price">₱  658.00</div>    
+                            <div class="order-total-price">₱  {{subtotal}}</div>    
                         </div>
 
                         <div class="place-order">

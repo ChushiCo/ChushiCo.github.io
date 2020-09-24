@@ -20,44 +20,100 @@
                 <div><a href="home" method="get">HOME</a></div>
                 <div><a href="catalog" method="get">PRODUCTS</a></div>
                 <div><a href="ordertracker" method="get">ORDER TRACKER</a></div>
-                <div><a class="selected" href="history" method="get">HISTORY</a></div>
-                <div><a href="cart" method="get">CART</a></div>
+                <div><a href="history" method="get">HISTORY</a></div>
+                <div><a class="selected" href="cart" method="get">CART</a></div>
                 <div><a href="myaccount" method="get">MY ACCOUNT</a></div>
             </div>
         </header>
 
-        <main id="profile-main">
-            <div class="profile-header">My profile</div>
+        <main id="checkout-cart">
+            <div class="checkout-header">CHECKOUT</div>
 
-            <div class="profile-body">
-                <div class="profile-contact">
-                    <div class="profile-contact-header">CONTACT INFORMATION</div>
-                    <div class="profile-contact-body">
-                        <div class="profile-contact-name">Niall Dela Cruz</div>
-                        <div class="profile-contact-email">delacruzniall@gmail.com</div>
-                        <div class="profile-contact-mob">+639173082020</div>
+            <div class="checkout-main">
+                <div class="checkout-address">
+                    <div class="checkout-address-header">Shipping Address</div>
+                    <div class="checkout-address-user">W.H. Taft Residences, Taft Ave, Malate, Room 38, Manila, 1004 Metro Manila
+
+                        <div class="checkout-new-address" id="new-address-btn">+ New Address</div>
                     </div>
                 </div>
 
-                <div class="profile-address">
-                    <div class="profile-address-header">DEFAULT SHIPPING ADDRESS</div>
-                    <div class="profile-address-body">
-                        <div class="profile-address-detail">W.H. Taft Residences, Taft Ave, Malate, Room 38, Manila, 1004 Metro Manila</div>
+                <div class="checkout-payment">
+                    <div class="checkout-payment-header">Payment Method</div>
+                    <div class="checkout-payment-method">
+                        <form id="payment">
+                            <label class="checkmark-payment"><input class="payment" type="radio" name="payment" value="cod" checked> Cash on Delivery</label>
+                            <label class="checkmark-payment"><input class="payment" type="radio" name="payment" value="cod"> Credit Card(Visa/Mastercard)</label>
+                        </form>
+                        
                     </div>
                 </div>
 
-                <div class="account">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
-                    <div class="account-name">Niall Dela Cruz</div>
+                <div class="checkout-date">
+                    <div class="checkout-date-header">Delivery Date & Time</div>
+                    <div class="checkout-date-time">08/24/2020 4:00 PM</div>
                 </div>
 
-                <a href="signout" id="signout" method="get">Sign out</a>
+
+                <div class="order-summary">
+                    <div class="order-summary-header">Order Summary
+                        <div class="order-items">2 Items in Cart</div>
+                    </div>
+                    <div class="order-summary-main">
+                        <div class="order-summary-list">
+                            <div class="order-item">Lotta Scallops (7x8 inches)</div>
+                            <div class="order-price">₱  658.00</div>
+                            <div class="order-quantity">Qty: 2</div>
+                        </div>
+                        
+                        <div class="order-subtotal-list">
+                            <div class="order-cart-subtotal-label">Cart Subtotal</div>
+                            <div class="order-cart-subtotal">₱  658.00</div>
+                        </div>
+                        
+
+                        <div class="order-total">
+                            <div class="order-total-label">Order Total</div>
+                            <div class="order-total-price">₱  658.00</div>    
+                        </div>
+
+                        <div class="place-order">
+                            Place Order
+                        </div>
+                    </div>
+                </div>
+
             </div>
-            
 
+
+            <div id="address-modal" class="modalAddress">
+                <div class="modalAddress-content">
+      
+                    <div class="modalAddress-header">
+                        <h2>ADD A NEW ADDRESS</h2>
+                        <span class="address-closeBtn">&times;</span>
+                    </div>
+                    
+                    <div class="modalAddress-body">
+                        <form id="form-add-address">
+                            <input id="inputStreet" placeholder="Input street of address" type="text" required></input>
+                            <input id="inputBldg" placeholder="Input building and room of address" type="text" required></input>
+                            <input id="inputCity" placeholder="Input city of address" type="text" required></input>
+                            <div class="modalAddress-footer">
+                              <input id="submit-address" type="submit" name="" value="ADD">
+                          </div>
+                        </form>
+                    </div>
+      
+                    
+                </div>
+            </div>
 
         </main>
 
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js'></script>
+        <script  src="checkout.js"></script>
 
     </body>
 </html>

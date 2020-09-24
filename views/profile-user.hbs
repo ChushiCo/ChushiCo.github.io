@@ -1,0 +1,63 @@
+<html>
+    <head>
+        <title>Welcome to Chushi!</title>
+        <meta content="text/htmlcharset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+        <link rel = "stylesheet" type = "text/css" href= "styles.css">
+
+    </head>
+
+    <body>
+        <header>
+            <div id="brand">
+                <img id="logo" src="img/logo.png">
+                <span id="name">CHUSHI</span>
+            </div>
+
+            <div id="tabs1">
+                <div><a href="home" method="get">HOME</a></div>
+                <div><a href="catalog" method="get">PRODUCTS</a></div>
+                <div><a href="ordertracker" method="get">ORDER TRACKER</a></div>
+                <div><a href="history" method="get">HISTORY</a></div>
+                <div><a href="cart" method="get">CART</a></div>
+                <div><a class="selected" href="myaccount" method="get">MY ACCOUNT</a></div>
+            </div>
+        </header>
+
+        <main id="profile-main">
+            <div class="profile-header">My profile</div>
+
+            <div class="profile-body">
+                <div class="profile-contact">
+                    <div class="profile-contact-header">CONTACT INFORMATION</div>
+                    <div class="profile-contact-body">
+                        <div class="profile-contact-name">{{first_name}} {{last_name}}</div>
+                        <div class="profile-contact-email">{{email}}</div>
+                        <div class="profile-contact-mob">+{{mob_num}}</div>
+                    </div>
+                </div>
+
+                <div class="profile-address">
+                    <div class="profile-address-header">DEFAULT SHIPPING ADDRESS</div>
+                    <div class="profile-address-body">
+                        <div class="profile-address-detail">{{street}}, {{bldg}}, {{city}}</div>
+                    </div>
+                </div>
+
+                <div class="account">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+                    <div class="account-name">{{first_name}} {{last_name}}</div>
+                </div>
+
+                <a href="signout" id="signout" method="get">Sign out</a>
+            </div>
+            
+
+
+        </main>
+
+
+    </body>
+</html>
