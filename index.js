@@ -569,6 +569,15 @@ app.get("/myaccount", (req, res)=>{
 })
 
 
+app.get("/inventory", (req, res)=>{
+    if (login = 100){
+        res.render("",{
+            image:req.session.image,
+            name:req.session.item_name,
+            quantity:req.session.item_quantity,
+       })
+    }
+})
 
 
 app.get("/signout", (req,res)=>{
