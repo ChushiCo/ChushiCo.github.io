@@ -44,6 +44,10 @@ hbs.registerHelper('if_equal', function(a, b, opts) {
 
 app.get("/", (req, res)=>{
     
+    if(!req.session.tracker){
+        req.session.tracker = []
+    }
+
     if(req.session.email){
         //user already signed in
         if(login == 1){
@@ -145,22 +149,6 @@ app.post("/login", urlencoder, (req,res)=>{
     
 })
 
-// function validUser(email, password){
-//     db.collection("users").get().then((snapshot) => {
-//         snapshot.forEach((doc) => {
-//             if((email == (doc.data().email)) && (password == (doc.data().password))){
-//                 console.log(email)
-//                 return true;
-//             }
-//         }, (err)=>{
-//             console.log("Error is"+err)
-//         });
-//         console.log("HERE")
-//         return false;
-//     }); 
-
-// }
-
 app.get("/register-page", (req, res)=>{
     res.render("register.hbs")
 })
@@ -210,7 +198,7 @@ app.get("/about", (req, res)=>{
 app.post("/filter", urlencoder, (req, res)=>{
 
     let filter = req.body.filter
-    // console.log(filter)
+    console.log(filter)
 
     if(req.session.email){
         if(login == 1){
@@ -257,17 +245,13 @@ app.post("/quantity-order", urlencoder, (req,res)=>{
     //NO ITEMS IN CART
      if(!req.session.cart){
         req.session.cart = []
-        // req.session.subtotal = subtotal
+        req.session.subtotal = subtotal
     }
     
-    // else{
-    //     // req.session.subtotal += subtotal 
-    //     // req.session.subtotal = parseFloat(req.session.subtotal).toFixed(2) + parseFloat(subtotal).toFixed(2) 
-    //     let current_total = parseFloat(req.session.subtotal).toFixed(2) + parseFloat(subtotal).toFixed(2) 
-
-    //     console.log(" ELSE ADD: "+current_total)
-    // }
-    req.session.subtotal = subtotal
+    else{ 
+        let new_subtotal = parseFloat(req.session.subtotal) + parseFloat(subtotal)
+        req.session.subtotal = parseFloat(new_subtotal).toFixed(2)
+    }
 
     if((qty6x6>0) && (qty7x8>0) && (qty10x12>0)){
 
@@ -398,16 +382,11 @@ app.post("/quantity-order", urlencoder, (req,res)=>{
         res.render("cart-user.hbs", {cart:req.session.cart, subtotal:req.session.subtotal})
     }
     else{
-        req.session.cart.push(item)
+        // req.session.cart.push(item)
         res.render("cart-user.hbs", {cart:req.session.cart, subtotal:req.session.subtotal})
     }
    
 })
-
-// function  computeQty(qty6x6, qty7x8, qty10x12){
-//     let quantity = parseInt(qty6x6) + parseInt(qty7x8) + parseInt(qty10x12);
-//     console.log("Q"+quantity)
-// }
 
 app.get("/cart", (req, res)=>{
     res.render("cart-user.hbs", {
@@ -460,16 +439,15 @@ app.post("/new-address", urlencoder, (req,res)=>{
 })
 
 app.post("/place_order", urlencoder, (req,res)=>{
-    // req.session.payment_method = req.body.payment
+    
     let address = ""
     let name = req.session.first_name+" "+req.session.last_name
     let order = ""
     let today = getDateToday()
     let time=getTodayTime()
+    let number = getOrderNumber()
 
     if(req.body.payment){
-        // console.log(req.body.payment)
-        // console.log(req.session.cart)
 
         if(req.session.new_street != undefined){
             address = address + req.session.new_street + ", " + req.session.new_bldg + ", " + req.session.new_city
@@ -478,8 +456,6 @@ app.post("/place_order", urlencoder, (req,res)=>{
         else if(req.session.street != undefined){
             address = address + req.session.street + ", " + req.session.bldg + ", " + req.session.city
         }
-
-        console.log(address)
 
         for(let i=0; i< req.session.cart.length; i++){
             if(req.session.cart[i].qty6x6 != undefined){
@@ -492,9 +468,6 @@ app.post("/place_order", urlencoder, (req,res)=>{
                 order = order + req.session.cart[i].qty10x12 +"x " + req.session.cart[i].name +" (10x12s inches)\n"
             }
         }
-        // console.log(req.session.cart)
-        res.redirect("/")
-        // res.render("home-user.hbs")
 
         db.collection("orders").add({
             address: address,
@@ -504,16 +477,16 @@ app.post("/place_order", urlencoder, (req,res)=>{
             ordered_by: name,
             payment: req.session.subtotal,
             progress: "Order Received",
-            time: time
-            
+            time: time,
+            number: number
     
           }).then(function(doc){
             console.log("Document written with UID: ", doc.id);
-            //  res.render("tracker-user.hbs")
+            req.session.cart = []
+            res.redirect("/ordertracker")
           }).catch(function(error) {
             console.error("Error adding document: ", error);
         });  
-        res.render("tracker-user.hbs")
 
     }
     else{
@@ -541,85 +514,78 @@ app.post("/place_order", urlencoder, (req,res)=>{
             })
         }
 
-
     }
     
 })
-
-
-
 
 app.get("/ordertracker", (req, res)=>{
-    // req.session.today
-    // db.collection("orders").get().then((snapshot) => {
-    //     snapshot.forEach((doc) => {
-    //         console.log(name)
-    //         console.log(doc.data().ordered_by)
-    //         if((name == (doc.data().ordered_by))){
-    //             history = {
-    //                 date: doc.data().date,
-    //                 number: doc.data().number,
-    //                 payment: doc.data().payment,
-    //                 order: doc.data().order,
-    //                 method: doc.data().method,
-    //                 address: doc.data().address
-    //             }
-    //             // console.log(history)
-    //             req.session.order_history.push(history)    
-    //         }
-    //     }, (err)=>{
-    //         console.log("Error is" +err)
-    //     })
-    //     // res.render("tracker-user.hbs")
-    // }); 
 
-    res.render("tracker-user.hbs")
-
-})
-
-app.get("/inventory", (req, res)=>{
-    if (login = 100){
-     res.render("inventory.hbs",{
-         name: doc.data().name,
-         image:  doc.data().image,
-         quantity: doc.data().quantity
-     })   
-    }
-})
-
-
-app.get("/history", (req, res)=>{
+    req.session.today =  getDateToday()
     let name = req.session.first_name+" "+req.session.last_name
-    console.log(req.session.first_name)
-    console.log(req.session.last_name)
+    let order={}
 
-    let history={}
-
-     if(!req.session.order_history){
-        req.session.order_history = []
-    }
-    
     db.collection("orders").get().then((snapshot) => {
         snapshot.forEach((doc) => {
-            if((name == (doc.data().ordered_by))){
-                history = {
-                    date: doc.data().date,
-                    number: doc.data().number,
-                    payment: doc.data().payment,
+            
+            if((name == (doc.data().ordered_by)) && (req.session.today === (doc.data().date))){
+                order = {
+                    progress: doc.data().progress,
+                    date: req.session.today,
+                    order_number: doc.data().number,
                     order: doc.data().order,
+                    payment: doc.data().payment,
                     method: doc.data().method,
                     address: doc.data().address
                 }
-                // console.log(history)
-                req.session.order_history.push(history)    
+                req.session.tracker.push(order) 
             }
+
         }, (err)=>{
             console.log("Error is" +err)
         })
+        res.render("tracker-user.hbs", {
+            tracker: req.session.tracker
+        })
+    }); 
+
+
+})
+
+app.get("/history", (req, res)=>{
+    let name = req.session.first_name+" "+req.session.last_name
+    let history={}
+    
+    if(!req.session.order_history){
+        req.session.order_history = []
+
+        db.collection("orders").get().then((snapshot) => {
+            snapshot.forEach((doc) => {
+                if((name == (doc.data().ordered_by))){
+                    history = {
+                        date: doc.data().date,
+                        number: doc.data().number,
+                        payment: doc.data().payment,
+                        order: doc.data().order,
+                        method: doc.data().method,
+                        address: doc.data().address
+                    }
+                    req.session.order_history.push(history)    
+                }
+            }, (err)=>{
+                console.log("Error is" +err)
+            })
+            res.render("history-user.hbs", {
+                history: req.session.order_history
+            })
+        }); 
+    }
+
+    else{
         res.render("history-user.hbs", {
             history: req.session.order_history
         })
-    }); 
+    }
+    
 
 })
 
@@ -637,6 +603,17 @@ app.get("/myaccount", (req, res)=>{
 })
 
 
+app.get("/inventory", (req, res)=>{
+    if (login = 100){
+     res.render("inventory.hbs",{
+         name: doc.data().name,
+         image:  doc.data().image,
+         quantity: doc.data().quantity
+     })   
+    }
+})
+
+
 
 app.get("/signout", (req,res)=>{
      login=0;
@@ -646,6 +623,7 @@ app.get("/signout", (req,res)=>{
 
 
 
+//FOR DAY September 24, 2020
 function getDateToday(){
     let today = new Date();
     let dd = today.getDate();
@@ -672,6 +650,7 @@ function getDateToday(){
     return today
 }
 
+// FOR SUBTOTAL COMPUTATION ON CART
 function computeSubtotal(price6x6, price7x8, price10x12, qty6x6, qty7x8, qty10x12){
     let priceA = price6x6 * qty6x6
     let priceB = price7x8 * qty7x8
@@ -681,6 +660,8 @@ function computeSubtotal(price6x6, price7x8, price10x12, qty6x6, qty7x8, qty10x1
     return parseFloat(subtotal).toFixed(2)
 }
 
+
+//FOR TIME 09/24/2020 1:00 PM
 function getDateTime(){
     let today = new Date();
     let dd = today.getDate();
@@ -704,19 +685,63 @@ function getDateTime(){
     return today;
 }
 
+// FOR DATE AND TIME September 24, 2020 1:00 pm
 function getTodayTime(){
     let today = new Date();
+    let dd = today.getDate();
+    let mm = today.getMonth()+1; 
+    let yyyy = today.getFullYear();
     let hours = today.getHours(); 
     let minutes = today.getMinutes();
-    
-    var ampm = hours >= 12 ? 'PM' : 'AM';
+
+    let month;
+    switch(mm){
+        case 1: month="January "; break;
+        case 2: month="February "; break;
+        case 3: month="March "; break;
+        case 4: month="April "; break;
+        case 5: month="May "; break;
+        case 6: month="June "; break;
+        case 7: month="July "; break;
+        case 8: month="August "; break;
+        case 9: month="September "; break;
+        case 10: month="October "; break;
+        case 11: month="November "; break;
+        case 12: month="December "; break;
+        // default: break;
+    }
+  
+    var ampm = hours >= 12 ? 'pm' : 'am';
     hours = hours % 12;
     hours = hours ? hours : 12;
     minutes = minutes < 10 ? '0'+minutes : minutes;
     var strTime = hours + ':' + minutes + ' ' + ampm;
 
-    return strTime;
+    return today= month + dd +", " +yyyy + " "+strTime;
 }
+
+//FOR ORDER NUMBER
+function getOrderNumber(){
+    let today = new Date();
+    let dd = today.getDate();
+    let mm = today.getMonth()+1; 
+    let yyyy = today.getFullYear();
+    let hours = today.getHours(); 
+    let minutes = today.getMinutes();
+    let mil = today.getMilliseconds()
+    
+    hours = hours % 12;
+    hours = hours ? hours : 12;
+    minutes = minutes < 10 ? '0'+minutes : minutes;
+    var strTime = hours +''+ minutes +''+ mil;
+
+    today= mm + dd + yyyy + strTime;
+    console.log(minutes)
+    console.log(mil)
+
+    return today;
+}
+
 
 app.listen(3000, function(){
     console.log("now listening to port 3000")

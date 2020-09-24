@@ -1396,6 +1396,13 @@ input[type=radio] {
     font-weight: bold;
 }
 
+.no-tracker-status{
+    font-size: 28px;
+    font-weight: bold;
+    padding: 10px;
+}
+
+
 /* FOR HISTORY - USER */
 #history-main{
     padding: 25px 35px;

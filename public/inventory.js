@@ -15,8 +15,6 @@ var firebaseConfig = {
 
 db.collection("inventory").get().then((snapshot) => {
 
-
-
      document.getElementById('inventory').innerHTML+=`
      <div class="inventory-item" id="${doc.id}">
      <img src="" id="${doc.data().name.replace(/"/g,'')}" class="image-inv"
