@@ -23,5 +23,8 @@
     "express-session": "^1.17.1",
     "firebase-admin": "^9.2.0",
     "hbs": "^4.1.1"
+  },
+  "engines" : {
+    "node" : "12.18.3"
   }
 }
