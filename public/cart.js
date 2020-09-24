@@ -1,3 +1,4 @@
+// FOR REMOVING ITEMS ON CART
 $(document).ready(function(){
     $("svg.cart-content-remove").click(function(){
         let id = $(this).attr("data-id")

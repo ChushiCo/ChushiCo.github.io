@@ -44,23 +44,23 @@ hbs.registerHelper('if_equal', function(a, b, opts) {
 
 app.get("/", (req, res)=>{
     
-    // if(req.session.email){
-    //     //user already signed in
-    //     if(login == 1){
-    //         res.render("home-user.hbs")
-    //     }
-    //     else if(login == 100){
-    //         res.render("home-admin.hbs")
-    //     }
-    // }
+    if(req.session.email){
+        //user already signed in
+        if(login == 1){
+            res.render("home-user.hbs")
+        }
+        else if(login == 100){
+            res.render("home-admin.hbs")
+        }
+    }
 
-    // else{
-    //     // the user has not registered or logged
-    //     res.render("index.hbs")
+    else{
+        // the user has not registered or logged
+        res.render("index.hbs")
     
-    // }
+    }
 
-    res.render("home-user.hbs")
+    // res.render("home-user.hbs")
 })
 
 app.post("/register", urlencoder, (req,res)=>{
@@ -73,29 +73,8 @@ app.post("/register", urlencoder, (req,res)=>{
     let bldg = req.body.bldg
     let city = req.body.city
     
-    let today = new Date();
-    let dd = today.getDate();
-    let mm = today.getMonth()+1; 
-    let yyyy = today.getFullYear();
-    let month;
-    switch(mm){
-        case 1: month="January "; break;
-        case 2: month="February "; break;
-        case 3: month="March "; break;
-        case 4: month="April "; break;
-        case 5: month="May "; break;
-        case 6: month="June "; break;
-        case 7: month="July "; break;
-        case 8: month="August "; break;
-        case 9: month="September "; break;
-        case 10: month="October "; break;
-        case 11: month="November "; break;
-        case 12: month="December "; break;
-        // default: break;
-    }
-
-    today= month + dd +", " +yyyy; 
-    req.session.today = today
+    
+    req.session.today =  getDateToday()
             
     db.collection("users").add({
         first_name: first_name,
@@ -196,36 +175,36 @@ app.get("/home", (req, res)=>{
 
 app.get("/catalog", (req, res)=>{
 
-    // if(req.session.email){
-    //     //user already signed in
-    //     if(login == 1){
-    //         res.render("products-user.hbs")
-    //     }
-    //     else if(login == 100){
-    //         // res.render("home-admin.hbs")
-    //     }
-    // }
+    if(req.session.email){
+        //user already signed in
+        if(login == 1){
+            res.render("products-user.hbs")
+        }
+        else if(login == 100){
+            // res.render("home-admin.hbs")
+        }
+    }
     
-    // else{
-    //     res.render("products.hbs")
-    // }
+    else{
+        res.render("products.hbs")
+    }
 
-    res.render("products-user.hbs")
+    // res.render("products-user.hbs")
     
 })
 
 app.get("/about", (req, res)=>{
 
-    if(req.session.email){
-        res.render("home.hbs",{
-            firstname: req.session.firstname,
-            lastname: req.session.lastname
-        })
-    }
+    // if(req.session.email){
+    //     res.render("home-user.hbs",{
+    //         firstname: req.session.first_name,
+    //         lastname: req.session.last_name
+    //     })
+    // }
 
-    else{
+    // else{
         res.render("about.hbs")
-    }
+    // }
 })
 
 app.post("/filter", urlencoder, (req, res)=>{
@@ -233,27 +212,27 @@ app.post("/filter", urlencoder, (req, res)=>{
     let filter = req.body.filter
     // console.log(filter)
 
-    // if(req.session.email){
-    //     if(login == 1){
-    //         console.log("FILTER" +login)
-    //         res.render("filter-user.hbs", {
-    //             filter:filter
-    //         })
-    //     }
-    //     else if(login == 100){
-    //         // res.render("home-admin.hbs")
-    //     }
-    // }
+    if(req.session.email){
+        if(login == 1){
+            console.log("FILTER" +login)
+            res.render("filter-user.hbs", {
+                filter:filter
+            })
+        }
+        else if(login == 100){
+            // res.render("home-admin.hbs")
+        }
+    }
     
-    // else{
-    //     res.render("filter.hbs", {
-    //         filter:filter
-    //     })
-    // }  
+    else{
+        res.render("filter.hbs", {
+            filter:filter
+        })
+    }  
 
-    res.render("filter-user.hbs", {
-        filter:filter
-    })
+    // res.render("filter-user.hbs", {
+    //     filter:filter
+    // })
 
 })
 
@@ -278,16 +257,17 @@ app.post("/quantity-order", urlencoder, (req,res)=>{
     //NO ITEMS IN CART
      if(!req.session.cart){
         req.session.cart = []
-        req.session.subtotal = subtotal
+        // req.session.subtotal = subtotal
     }
     
-    else{
-        // req.session.subtotal += subtotal 
-        // req.session.subtotal = parseFloat(req.session.subtotal).toFixed(2) + parseFloat(subtotal).toFixed(2) 
-        let current_total = parseFloat(req.session.subtotal).toFixed(2) + parseFloat(subtotal).toFixed(2) 
+    // else{
+    //     // req.session.subtotal += subtotal 
+    //     // req.session.subtotal = parseFloat(req.session.subtotal).toFixed(2) + parseFloat(subtotal).toFixed(2) 
+    //     let current_total = parseFloat(req.session.subtotal).toFixed(2) + parseFloat(subtotal).toFixed(2) 
 
-        console.log(" ELSE ADD: "+current_total)
-    }
+    //     console.log(" ELSE ADD: "+current_total)
+    // }
+    req.session.subtotal = subtotal
 
     if((qty6x6>0) && (qty7x8>0) && (qty10x12>0)){
 
@@ -424,19 +404,150 @@ app.post("/quantity-order", urlencoder, (req,res)=>{
    
 })
 
-function computeSubtotal(price6x6, price7x8, price10x12, qty6x6, qty7x8, qty10x12){
-    let priceA = price6x6 * qty6x6
-    let priceB = price7x8 * qty7x8
-    let priceC = price10x12 * qty10x12
-    let subtotal = priceA + priceB + priceC;
-
-    return parseFloat(subtotal).toFixed(2)
-}
-
 // function  computeQty(qty6x6, qty7x8, qty10x12){
 //     let quantity = parseInt(qty6x6) + parseInt(qty7x8) + parseInt(qty10x12);
 //     console.log("Q"+quantity)
 // }
+
+app.get("/cart", (req, res)=>{
+    res.render("cart-user.hbs", {
+        cart:req.session.cart, 
+        subtotal: parseFloat(req.session.subtotal).toFixed(2)})
+})
+
+app.post("/removeitem", urlencoder, (req,res)=>{
+    let decrease = req.session.cart[parseInt(req.body.cartitem, 10)].total
+    req.session.subtotal -= decrease
+    
+    req.session.cart.splice(parseInt(req.body.cartitem, 10),1)
+    res.render("cart-user.hbs", {cart:req.session.cart, subtotal:  parseFloat(req.session.subtotal).toFixed(2)})
+})
+
+app.get("/checkout", (req, res)=>{
+
+    today=getDateTime()
+
+    res.render("checkout-user.hbs", {
+        street: req.session.street,
+        bldg: req.session.bldg,
+        city: req.session.city,
+        date: today,
+        order: req.session.cart,
+        subtotal: req.session.subtotal,
+        quantity: req.session.quantity
+
+    })
+
+})
+
+
+app.post("/new-address", urlencoder, (req,res)=>{
+    req.session.new_street = req.body.new_street
+    req.session.new_bldg = req.body.new_bldg
+    req.session.new_city = req.body.new_city
+
+    today=getDateTime()
+
+    res.render("checkout-user.hbs", {
+        street: req.session.new_street,
+        bldg: req.session.new_bldg,
+        city: req.session.new_city,
+        date: today,
+        order: req.session.cart,
+        subtotal: parseFloat(req.session.subtotal).toFixed(2),
+        quantity: req.session.quantity
+    })
+})
+
+app.post("/place_order", urlencoder, (req,res)=>{
+    // req.session.payment_method = req.body.payment
+    let address = ""
+    let name = req.session.first_name+" "+req.session.last_name
+    let order = ""
+    let today = getDateToday()
+    let time=getTodayTime()
+
+    if(req.body.payment){
+        // console.log(req.body.payment)
+        // console.log(req.session.cart)
+
+        if(req.session.new_street != undefined){
+            address = address + req.session.new_street + ", " + req.session.new_bldg + ", " + req.session.new_city
+        }
+
+        else if(req.session.street != undefined){
+            address = address + req.session.street + ", " + req.session.bldg + ", " + req.session.city
+        }
+
+        console.log(address)
+
+        for(let i=0; i< req.session.cart.length; i++){
+            if(req.session.cart[i].qty6x6 != undefined){
+                order = order + req.session.cart[i].qty6x6 +"x " + req.session.cart[i].name +" (6x6 inches)\n"
+            }
+            else if(req.session.cart[i].qty7x8 != undefined){
+                order = order + req.session.cart[i].qty7x8 +"x " + req.session.cart[i].name +" (7x8 inches)\n"
+            }
+            else if(req.session.cart[i].qty10x12 != undefined){
+                order = order + req.session.cart[i].qty10x12 +"x " + req.session.cart[i].name +" (10x12s inches)\n"
+            }
+        }
+        // console.log(req.session.cart)
+        res.redirect("/")
+        // res.render("home-user.hbs")
+
+        db.collection("orders").add({
+            address: address,
+            date: today,
+            method: req.body.payment,
+            order: order,
+            ordered_by: name,
+            payment: req.session.subtotal,
+            progress: "Order Received",
+            time: time
+            
+    
+          }).then(function(doc){
+            console.log("Document written with UID: ", doc.id);
+            //  res.render("tracker-user.hbs")
+          }).catch(function(error) {
+            console.error("Error adding document: ", error);
+        });  
+        res.render("tracker-user.hbs")
+
+    }
+    else{
+        if(req.session.new_street != undefined){
+            res.render("checkout-user.hbs", {
+                street: req.session.new_street,
+                bldg: req.session.new_bldg,
+                city: req.session.new_city,
+                date: today,
+                order: req.session.cart,
+                subtotal: req.session.subtotal,
+                quantity: req.session.quantity
+            })
+        }
+
+        else if(req.session.street != undefined){
+            res.render("checkout-user.hbs", {
+                street: req.session.street,
+                bldg: req.session.bldg,
+                city: req.session.city,
+                date: today,
+                order: req.session.cart,
+                subtotal: req.session.subtotal,
+                quantity: req.session.quantity
+            })
+        }
+
+
+    }
+    
+})
+
+
+
 
 app.get("/ordertracker", (req, res)=>{
     // req.session.today
@@ -463,14 +574,19 @@ app.get("/ordertracker", (req, res)=>{
     // }); 
 
     res.render("tracker-user.hbs")
-    
-// db.collection("inventory").add(newObject).then(function(doc) {
-//     console.log("Document written with UID: ", doc.id);
-// })
-// .catch(function(error) {
-//     console.error("Error adding document: ", error);
-// });
+
 })
+
+app.get("/inventory", (req, res)=>{
+    if (login = 100){
+     res.render("inventory.hbs",{
+         name: doc.data().name,
+         image:  doc.data().image,
+         quantity: doc.data().quantity
+     })   
+    }
+})
+
 
 app.get("/history", (req, res)=>{
     let name = req.session.first_name+" "+req.session.last_name
@@ -507,22 +623,65 @@ app.get("/history", (req, res)=>{
 
 })
 
-app.get("/cart", (req, res)=>{
-    res.render("cart-user.hbs", {
-        cart:req.session.cart, 
-        subtotal:req.session.subtotal})
+
+app.get("/myaccount", (req, res)=>{
+    res.render("profile-user.hbs", {
+        first_name: req.session.first_name,
+        last_name: req.session.last_name,
+        mob_num: req.session.mob_num,
+        street: req.session.street,
+        bldg: req.session.bldg,
+        city: req.session.city,
+
+    })
 })
 
-app.post("/removeitem", urlencoder, (req,res)=>{
-    let decrease = req.session.cart[parseInt(req.body.cartitem, 10)].total
-    req.session.subtotal -= decrease
-    
-    req.session.cart.splice(parseInt(req.body.cartitem, 10),1)
-    res.render("cart-user.hbs", {cart:req.session.cart, subtotal:  parseFloat(req.session.subtotal).toFixed(2)})
+
+
+app.get("/signout", (req,res)=>{
+     login=0;
+    req.session.destroy()
+    res.redirect("/")
 })
 
-app.get("/checkout", (req, res)=>{
 
+
+function getDateToday(){
+    let today = new Date();
+    let dd = today.getDate();
+    let mm = today.getMonth()+1; 
+    let yyyy = today.getFullYear();
+    let month;
+    switch(mm){
+        case 1: month="January "; break;
+        case 2: month="February "; break;
+        case 3: month="March "; break;
+        case 4: month="April "; break;
+        case 5: month="May "; break;
+        case 6: month="June "; break;
+        case 7: month="July "; break;
+        case 8: month="August "; break;
+        case 9: month="September "; break;
+        case 10: month="October "; break;
+        case 11: month="November "; break;
+        case 12: month="December "; break;
+        // default: break;
+    }
+
+    today= month + dd +", " +yyyy; 
+    return today
+}
+
+function computeSubtotal(price6x6, price7x8, price10x12, qty6x6, qty7x8, qty10x12){
+    let priceA = price6x6 * qty6x6
+    let priceB = price7x8 * qty7x8
+    let priceC = price10x12 * qty10x12
+    let subtotal = priceA + priceB + priceC;
+
+    return parseFloat(subtotal).toFixed(2)
+}
+
+function getDateTime(){
     let today = new Date();
     let dd = today.getDate();
     let mm = today.getMonth()+1; 
@@ -540,51 +699,24 @@ app.get("/checkout", (req, res)=>{
     minutes = minutes < 10 ? '0'+minutes : minutes;
     var strTime = hours + ':' + minutes + ' ' + ampm;
 
-    today= mm + "/" + dd +"/" + yyyy + " " + strTime; 
+    today= mm + "/" + dd +"/" + yyyy + " " + strTime;
 
-    console.log(today)
-    res.render("checkout-user.hbs", {
-        street: req.session.street,
-        bldg: req.session.bldg,
-        city: req.session.city,
-        date: today,
-        order: req.session.cart,
-        subtotal: req.session.subtotal,
-        quantity: req.session.quantity
+    return today;
+}
 
-    })
+function getTodayTime(){
+    let today = new Date();
+    let hours = today.getHours(); 
+    let minutes = today.getMinutes();
+    
+    var ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12;
+    minutes = minutes < 10 ? '0'+minutes : minutes;
+    var strTime = hours + ':' + minutes + ' ' + ampm;
 
-})
-
-app.get("/myaccount", (req, res)=>{
-    res.render("profile-user.hbs", {
-        first_name: req.session.first_name,
-        last_name: req.session.last_name,
-        mob_num: req.session.mob_num,
-        street: req.session.street,
-        bldg: req.session.bldg,
-        city: req.session.city,
-
-    })
-})
-
-
-app.get("/inventory", (req, res)=>{
-    if (login = 100){
-        res.render("",{
-            image:req.session.image,
-            name:req.session.item_name,
-            quantity:req.session.item_quantity,
-       })
-    }
-})
-
-
-app.get("/signout", (req,res)=>{
-     login=0;
-    req.session.destroy()
-    res.redirect("/")
-})
+    return strTime;
+}
 
 app.listen(3000, function(){
     console.log("now listening to port 3000")
