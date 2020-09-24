@@ -34,16 +34,18 @@
                     <div class="checkout-address-header">Shipping Address</div>
                     <div class="checkout-address-user">{{street}}, {{bldg}}, {{city}}
 
-                        <div class="checkout-new-address">+ New Address</div>
+                        <div class="checkout-new-address" id="new-address-btn">+ New Address</div>
                     </div>
                 </div>
 
                 <div class="checkout-payment">
                     <div class="checkout-payment-header">Payment Method</div>
                     <div class="checkout-payment-method">
-                        <form id="payment">
-                            <label class="checkmark-payment"><input class="payment" type="radio" name="payment" value="cod" checked> Cash on Delivery</label>
-                            <label class="checkmark-payment"><input class="payment" type="radio" name="payment" value="cod"> Credit Card(Visa/Mastercard)</label>
+                        <form id="payment" action="place_order" method="post">
+                            <label class="checkmark-payment"><input class="payment" type="radio" name="payment" value="Cash on Delivery"> Cash on Delivery</label>
+                            <label class="checkmark-payment"><input class="payment" type="radio" name="payment" value="Credit Card"> Credit Card(Visa/Mastercard)</label>
+                            
+                            {{!-- <input type="hidden" name="order_name" value={{order}}> --}}
                         </form>
                         
                     </div>
@@ -109,7 +111,37 @@
                 </div>
 
             </div>
+
+
+
+            <div id="address-modal" class="modalAddress">
+                <div class="modalAddress-content">
+      
+                    <div class="modalAddress-header">
+                        <h2>CHANGE NEW ADDRESS</h2>
+                        <span class="address-closeBtn">&times;</span>
+                    </div>
+                    
+                    <div class="modalAddress-body">
+                        <form id="form-add-address" action="new-address" method="post">
+                            <input id="inputStreet" placeholder="Input street of address" type="text" name="new_street">
+                            <input id="inputBldg" placeholder="Input building and room of address" type="text" name="new_bldg">
+                            <input id="inputCity" placeholder="Input city of address" type="text" name="new_city">
+                            <div class="modalAddress-footer">
+                              <input id="submit-address" type="submit" value="CHANGE">
+                          </div>
+                        </form>
+                    </div>
+      
+                    
+                </div>
+            </div>
+
         </main>
+
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js'></script>
+        <script  src="checkout.js"></script>
 
 
     </body>

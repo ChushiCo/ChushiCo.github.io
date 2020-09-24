@@ -1,4 +1,4 @@
-//EDIT INTRO MODAL
+//EDIT ADDRESS MODAL
 var address_modal = document.getElementById('address-modal');
 var modal_btn = document.getElementById('new-address-btn');
 var form_add_addresss = document.getElementById('form-add-address');
@@ -21,8 +21,9 @@ function openModalAddress(){
 
       console.log("new address added");
       address_modal.style.display='none';
-    //   clearEditIntro();
-    //   displayIntroData();
+      
+      $(form_add_addresss).submit()
+
     }
   });
 }
@@ -36,3 +37,10 @@ function outsideClickAddress(e){
     address_modal.style.display='none';
   }
 }
+
+// FOR SUBMITTING PAYMENT METHOD
+$(document).ready(function(){
+  $("div.place-order").click(function(){
+      $("form#payment").submit()
+  })
+})
