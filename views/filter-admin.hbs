@@ -20,10 +20,10 @@
             <div id="tabs1">
                 <div><a href="home" method="get">HOME</a></div>
                 <div><a class="selected" href="catalog" method="get">PRODUCTS</a></div>
-                <div><a href="ordertracker" method="get">ORDER TRACKER</a></div>
-                <div><a href="history" method="get">HISTORY</a></div>
-                <div><a href="cart" method="get">CART</a></div>
-                <div><a href="myaccount" method="get">MY ACCOUNT</a></div>
+                <div><a href="" method="get">USERS</a></div>
+                <div><a href="" method="get">INVENTORY</a></div>
+                <div><a href="" method="get">ORDERS</a></div>
+                <div class="signout-tab"><a href="signout" method="get">SIGN OUT</a></div>
             </div> 
         </header>
 
@@ -186,6 +186,15 @@
                  </div>
             </div>
 
+            <div class="add-product">
+                <div class="add-product-div">
+                    <a href="addproductpage" method="get">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+                    <div class="add-product-label">Add Product</div>
+                    </a>
+                </div> 
+            </div>
+
             {{#if_equal filter "new"}}
                 <div class="products-admin">
                     <div id="product-list"></div>
@@ -193,37 +202,37 @@
             {{/if_equal}}
 
             {{#if_equal filter "popular"}}
-                <div class="products">
+                <div class="products-admin">
                     <div id="product-list-popular"></div>
                 </div>
             {{/if_equal}}
 
             {{#if_equal filter "low"}}
-                <div class="products">
+                <div class="products-admin">
                     <div id="product-list-low"></div>
                 </div>
             {{/if_equal}}
 
             {{#if_equal filter "high"}}
-                <div class="products">
+                <div class="products-admin">
                     <div id="product-list-high"></div>
                 </div>
             {{/if_equal}}
 
              {{#if_equal filter "6x6"}}
-                <div class="products">
+                <div class="products-admin">
                     <div id="product-list-6x6"></div>
                 </div>
             {{/if_equal}}
 
             {{#if_equal filter "7x8"}}
-                <div class="products">
+                <div class="products-admin">
                     <div id="product-list-7x8"></div>
                 </div>
             {{/if_equal}}
 
             {{#if_equal filter "10x12"}}
-                <div class="products">
+                <div class="products-admin">
                     <div id="product-list-10x12"></div>
                 </div>
             {{/if_equal}}

@@ -44,27 +44,27 @@ hbs.registerHelper('if_equal', function(a, b, opts) {
 
 app.get("/", (req, res)=>{
     
-    if(!req.session.tracker){
-        req.session.tracker = []
-    }
+    // if(!req.session.tracker){
+    //     req.session.tracker = []
+    // }
 
-    if(req.session.email){
-        //user already signed in
-        if(login == 1){
-            res.render("home-user.hbs")
-        }
-        else if(login == 100){
-            res.render("home-admin.hbs")
-        }
-    }
+    // if(req.session.email){
+    //     //user already signed in
+    //     if(login == 1){
+    //         res.render("home-user.hbs")
+    //     }
+    //     else if(login == 100){
+    //         res.render("home-admin.hbs")
+    //     }
+    // }
 
-    else{
-        // the user has not registered or logged
-        res.render("index.hbs")
+    // else{
+    //     // the user has not registered or logged
+    //     res.render("index.hbs")
     
-    }
+    // }
 
-    // res.render("home-admin.hbs")
+    res.render("home-admin.hbs")
 })
 
 app.post("/register", urlencoder, (req,res)=>{
@@ -76,6 +76,7 @@ app.post("/register", urlencoder, (req,res)=>{
     let street = req.body.street
     let bldg = req.body.bldg
     let city = req.body.city
+    let date_digit = getDateDigit()
     
     
     req.session.today =  getDateToday()
@@ -87,10 +88,11 @@ app.post("/register", urlencoder, (req,res)=>{
         email: email,
         password: password,
         role: "Client",
-        date_start: today,
+        date_start: req.session.today,
         street: street,
         bldg: bldg,
-        city: city
+        city: city,
+        date_digit: parseInt(date_digit)
     }).then(function(doc) {
         console.log("Document written with UID: ", doc.id);
         res.render("login-banner.hbs")
@@ -163,21 +165,21 @@ app.get("/home", (req, res)=>{
 
 app.get("/catalog", (req, res)=>{
 
-    if(req.session.email){
-        //user already signed in
-        if(login == 1){
-            res.render("products-user.hbs")
-        }
-        else if(login == 100){
-            res.render("products-admin.hbs")
-        }
-    }
+    // if(req.session.email){
+    //     //user already signed in
+    //     if(login == 1){
+    //         res.render("products-user.hbs")
+    //     }
+    //     else if(login == 100){
+    //         res.render("products-admin.hbs")
+    //     }
+    // }
     
-    else{
-        res.render("products.hbs")
-    }
+    // else{
+    //     res.render("products.hbs")
+    // }
 
-    // res.render("products-admin.hbs")
+    res.render("products-admin.hbs")
     
 })
 
@@ -198,29 +200,29 @@ app.get("/about", (req, res)=>{
 app.post("/filter", urlencoder, (req, res)=>{
 
     let filter = req.body.filter
-    console.log(filter)
+    // console.log(filter)
 
-    if(req.session.email){
-        if(login == 1){
-            console.log("FILTER" +login)
-            res.render("filter-user.hbs", {
-                filter:filter
-            })
-        }
-        else if(login == 100){
-            // res.render("home-admin.hbs")
-        }
-    }
+    // if(req.session.email){
+    //     if(login == 1){
+    //         console.log("FILTER" +login)
+    //         res.render("filter-user.hbs", {
+    //             filter:filter
+    //         })
+    //     }
+    //     else if(login == 100){
+    //         // res.render("home-admin.hbs")
+    //     }
+    // }
     
-    else{
-        res.render("filter.hbs", {
-            filter:filter
-        })
-    }  
+    // else{
+    //     res.render("filter.hbs", {
+    //         filter:filter
+    //     })
+    // }  
 
-    // res.render("filter-user.hbs", {
-    //     filter:filter
-    // })
+    res.render("filter-admin.hbs", {
+        filter:filter
+    })
 
 })
 
@@ -602,6 +604,41 @@ app.get("/myaccount", (req, res)=>{
     })
 })
 
+app.get("/users", (req, res)=>{
+
+    let user={}
+
+    if(!req.session.users){
+        req.session.users = []
+
+        db.collection("users").orderBy("date_digit","desc").get().then((snapshot) => {
+            snapshot.forEach((doc) => {
+                user = {
+                    first_name: doc.data().first_name,
+                    last_name: doc.data().last_name,
+                    email: doc.data().email,
+                    mob_num: doc.data().mob_num,
+                    role: doc.data().role,
+                    date_start: doc.data().date_start
+                }
+                req.session.users.push(user)    
+            }, (err)=>{
+                console.log("Error is" +err)
+            })
+            res.render("users-list-admin.hbs", {
+                users: req.session.users
+            })
+        }); 
+    }
+
+    else{
+        res.render("users-list-admin.hbs",{
+            users: req.session.users
+        })  
+    }
+
+})
+
 app.get("/orders",(req,res)=>{
     res.render("orders.hbs",{
         address:doc.data().address,
@@ -759,6 +796,22 @@ function getOrderNumber(){
     today= mm + dd + yyyy + strTime;
     console.log(minutes)
     console.log(mil)
+
+    return today;
+}
+
+//FOR DATE DIGIT - ORDER BY FOR ADMIN USERS 
+function getDateDigit(){
+    let today = new Date();
+    let dd = today.getDate();
+    let mm = today.getMonth()+1; 
+    let yyyy = today.getFullYear();
+
+    if (mm < 10) {
+        mm = '0' + mm;
+    }
+
+    today= mm + dd + yyyy;
 
     return today;
 }

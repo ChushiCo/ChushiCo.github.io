@@ -1848,7 +1848,7 @@ form .edit-product-btn{
     background: #FFC178;
     padding: 15px 20px;
     display: grid;
-    grid-template-columns: 280px 390px 290px 140px 280px;
+    grid-template-columns: 240px 450px 290px 140px 280px;
 }
 
 .users-main-body-head{
@@ -1860,7 +1860,7 @@ form .edit-product-btn{
     border: 3px solid black;
     padding: 15px 20px;
     display: grid;
-    grid-template-columns: 280px 390px 290px 140px 280px 40px;
+    grid-template-columns: 240px 450px 290px 140px 240px 40px;
 }
 
 .users-list{
@@ -1872,6 +1872,10 @@ form .edit-product-btn{
 .users-main-list svg{
     height: 40px;
     width: 40px;
+}
+
+.users-main-list svg:hover{
+    fill: #FF0000;
 }
 
 /* FOR INVENTORY - ADMIN */
