@@ -26,59 +26,41 @@ let file = {};
 function chooseFile(e){
     file = e.target.files[0];
 }
+var addBtn = document.getElementById('add-btn');
+var submitForm = document.getElementById('add-product-form');
 
-function addProductButtonPressed(){
-  // e.preventDefault();
-  console.log("HERE")
-  // let name = document.getElementById('product_name').value;
-  // let desc = document.getElementById('product_description').value;
-  // let ing = document.getElementById('product_ingredients').value;
-  // let small = document.getElementById('product_6x6').value;
-  // let medium = document.getElementById('product_7x8').value;
-  // let large = document.getElementById('product_10x12').value;
+addBtn.addEventListener('click', function(e){
+  let inputForm = document.getElementById('add-form');
+  e.preventDefault();
+  console.log("CLICK")
 
-  // console.log(name)
-  // console.log(desc)
-  // console.log(ing)
-  // console.log(small)
-  // console.log(medium)
-  // console.log(large)
-  // console.log("HERERERE")
+  db.collection("products").add({
+      name: inputForm.product_name.value,
+      description: inputForm.product_description.value,
+      ingredients: inputForm.product_ingredients.value,
+      orders: parseInt(0),
+      price6x6: parseInt(inputForm.product_6x6.value),
+      price7x8: parseInt(inputForm.product_7x8.value),
+      price10x12: parseInt(inputForm.product_10x12.value)
+  }).then(function(doc) {
+      console.log("Document written with UID: ", doc.id);
+      let img = doc.id
+      img = 'products/'+img+'.jpg'
 
-  // db.collection("orders").add({
-  //     first_name: first_name,
-  //     last_name: last_name,
-  //     mob_num: parseInt(mob_num),
-  //     email: email,
-  //     password: password,
-  //     role: "Client",
-  //     date_start: today,
-  //     street: street,
-  //     bldg: bldg,
-  //     city: city
-  // }).then(function(doc) {
-  //     console.log("Document written with UID: ", doc.id);
-  // })
-  // .catch(function(error) {
-  //     console.error("Error adding document: ", error);
-  //     res.render("register.hbs")
-  // });
+      firebase.storage().ref(img).put(file).then(function(){
+        console.log("successfully uploaded") 
+        submitForm.submit();
+      }).catch(error => { 
+        console.log(error.message)
+      })
 
-    // e.preventDefault();
-    let name = document.getElementById('product_name').value;
-     console.log("HERE")
-     console.log('products/'+name+'.jpg')
-     name = 'products/'+name+'.jpg'
-     console.log(name)
-     console.log(file)
+  })
+  .catch(function(error) {
+      console.error("Error adding document: ", error);
+  });
+
      
-    // //  firebase.storage().ref('products/'+file.name)
-    //  firebase.storage().ref(name).put(file).then(function(){
-    //   console.log("successfully uploaded") 
-    //  }).catch(error => { 
-    //    console.log(error.message)
-    //  })
-}
+});
 
 
 
