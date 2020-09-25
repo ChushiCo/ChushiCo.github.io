@@ -602,6 +602,18 @@ app.get("/myaccount", (req, res)=>{
     })
 })
 
+app.get("/orders",(req,res)=>{
+    res.render("orders.hbs",{
+        address:doc.data().address,
+        date:doc.data().date,
+        number:doc.data().number,
+        order:doc.data().order,
+        ordered_by:doc.data().ordered_by,
+        payment:doc.data().payment,
+        progress:doc.data().progress,
+        time:doc.data().time
+    })
+})
 
 app.get("/inventory", (req, res)=>{
     if (login = 100){
