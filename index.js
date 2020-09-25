@@ -198,29 +198,29 @@ app.get("/about", (req, res)=>{
 app.post("/filter", urlencoder, (req, res)=>{
 
     let filter = req.body.filter
-    // console.log(filter)
+    console.log(filter)
 
-    // if(req.session.email){
-    //     if(login == 1){
-    //         console.log("FILTER" +login)
-    //         res.render("filter-user.hbs", {
-    //             filter:filter
-    //         })
-    //     }
-    //     else if(login == 100){
-    //         // res.render("home-admin.hbs")
-    //     }
-    // }
+    if(req.session.email){
+        if(login == 1){
+            console.log("FILTER" +login)
+            res.render("filter-user.hbs", {
+                filter:filter
+            })
+        }
+        else if(login == 100){
+            // res.render("home-admin.hbs")
+        }
+    }
     
-    // else{
-    //     res.render("filter.hbs", {
-    //         filter:filter
-    //     })
-    // }  
+    else{
+        res.render("filter.hbs", {
+            filter:filter
+        })
+    }  
 
-    res.render("filter-user.hbs", {
-        filter:filter
-    })
+    // res.render("filter-user.hbs", {
+    //     filter:filter
+    // })
 
 })
 
@@ -629,19 +629,10 @@ app.get("/addproductpage", (req, res)=>{
     res.render("add-product-admin.hbs")
 })
 
-// app.post("/addproduct", urlencoder, (req, res)=>{
-//     console.log(req.body.product_name)
-//     console.log(req.body.product_description)
-//     console.log(req.body.product_ingredients)
-//     console.log(req.body.product_6x6)
-//     console.log(req.body.product_7x8)
-//     console.log(req.body.product_10x12)
-//     console.log(req.body.product_image)
+app.get("/addproduct", (req, res)=>{
+    res.render("products-admin.hbs")
+})
 
-//     res.render("home-admin.hbs")
-
-    
-// })
 
 
 
