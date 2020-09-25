@@ -603,25 +603,47 @@ app.get("/myaccount", (req, res)=>{
 })
 
 app.get("/orders",(req,res)=>{
-    res.render("orders.hbs",{
-        address:doc.data().address,
-        date:doc.data().date,
-        number:doc.data().number,
-        order:doc.data().order,
-        ordered_by:doc.data().ordered_by,
-        payment:doc.data().payment,
-        progress:doc.data().progress,
-        time:doc.data().time
+    let orders=[]
+    if(login == 100){
+        db.collection("orders").get().then((snapshot)=>{
+            snapshot.forEach((doc)=>{
+                orders.push({
+                    address:doc.data().address,
+                    date:doc.data().date,
+                    number:doc.data().number,
+                    order:doc.data().order,
+                    ordered_by:doc.data().ordered_by,
+                    payment:doc.data().payment,
+                    progress:doc.data().progress,
+                    time:doc.data().time
+                })
+            })
+            res.render("orders.hbs",{
+                orders:orders
     })
+        })
+    }
+
 })
 
 app.get("/inventory", (req, res)=>{
-    if (login = 100){
-     res.render("inventory.hbs",{
-         name: doc.data().name,
-         image:  doc.data().image,
-         quantity: doc.data().quantity
-     })   
+    let inventory=[]
+    if (login == 100){
+        db.collection("inventory").get().then((snapshot)=>{
+            snapshot.forEach((doc)=>{
+                inventory.push({
+                    name: doc.data().name,
+                    quantity: doc.data().quantity
+                })
+            })
+            res.render("inventory.hbs",{
+                inventory:inventory
+            })
+
+        })
+        ,(err)=>{
+            console.log(err)
+        }
     }
 })
 
