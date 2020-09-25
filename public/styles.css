@@ -1574,6 +1574,8 @@ input[type=radio] {
     margin: 30px auto 0;
 }
 
+
+
 /* FOR ADMIN */
 .signout-tab a{
     background: black;
@@ -1593,9 +1595,6 @@ input[type=radio] {
     grid-column: 1/2;
     grid-row: 1/4;
     background-color: black;
-
-    /* CHANGED WIDTH TO FIXED VALUE -KD*/
-    /* width: 13%; */
     width: 200px;
     height: 100%;
     padding: 5px;
@@ -1610,6 +1609,11 @@ input[type=radio] {
     grid-column: 2/3;
     grid-row: 3/4;
 }
+
+#specific-product-admin{
+    margin: 30px 50px;
+}
+
 
 .add-product{
     grid-column: 2/3;
@@ -1638,10 +1642,20 @@ input[type=radio] {
     color: black;
 }
 
-.add-product-div:hover{
+.add-product-div a:hover{
     color: #FFC178;
     fill: #FFC178;
 }
+
+.add-product-div svg:hover{
+    fill: #FFC178;
+}
+
+.add-product-div .add-product-label:hover{
+    color: #FFC178;
+}
+
+
 
 .product-item-admin{
     display: inline-block;
@@ -1819,11 +1833,45 @@ form .edit-product-btn{
 
 /* FOR USERS - ADMIN */
 #users-main{
-    padding: 25px 20px;
+    padding: 25px;
 }
 
 .users-main-header{
     font-size: 36px;
     font-weight: bold;
     text-transform: uppercase;
+    margin-bottom: 20px;
 }
+
+.users-main-body{
+    border: 3px solid black;
+    background: #FFC178;
+    padding: 15px 20px;
+    display: grid;
+    grid-template-columns: 280px 390px 290px 140px 280px;
+}
+
+.users-main-body-head{
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.users-main-list{
+    border: 3px solid black;
+    padding: 15px 20px;
+    display: grid;
+    grid-template-columns: 280px 390px 290px 140px 280px 40px;
+}
+
+.users-list{
+    font-size: 28px;
+    position: relative;
+    top: 5px;
+}
+
+.users-main-list svg{
+    height: 40px;
+    width: 40px;
+}
+
+/* FOR INVENTORY - ADMIN */

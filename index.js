@@ -44,27 +44,27 @@ hbs.registerHelper('if_equal', function(a, b, opts) {
 
 app.get("/", (req, res)=>{
     
-    if(!req.session.tracker){
-        req.session.tracker = []
-    }
+    // if(!req.session.tracker){
+    //     req.session.tracker = []
+    // }
 
-    if(req.session.email){
-        //user already signed in
-        if(login == 1){
-            res.render("home-user.hbs")
-        }
-        else if(login == 100){
-            res.render("home-admin.hbs")
-        }
-    }
+    // if(req.session.email){
+    //     //user already signed in
+    //     if(login == 1){
+    //         res.render("home-user.hbs")
+    //     }
+    //     else if(login == 100){
+    //         res.render("home-admin.hbs")
+    //     }
+    // }
 
-    else{
-        // the user has not registered or logged
-        res.render("index.hbs")
+    // else{
+    //     // the user has not registered or logged
+    //     res.render("index.hbs")
     
-    }
+    // }
 
-    // res.render("home-admin.hbs")
+    res.render("home-admin.hbs")
 })
 
 app.post("/register", urlencoder, (req,res)=>{
@@ -163,21 +163,21 @@ app.get("/home", (req, res)=>{
 
 app.get("/catalog", (req, res)=>{
 
-    if(req.session.email){
-        //user already signed in
-        if(login == 1){
-            res.render("products-user.hbs")
-        }
-        else if(login == 100){
-            res.render("products-admin.hbs")
-        }
-    }
+    // if(req.session.email){
+    //     //user already signed in
+    //     if(login == 1){
+    //         res.render("products-user.hbs")
+    //     }
+    //     else if(login == 100){
+    //         res.render("products-admin.hbs")
+    //     }
+    // }
     
-    else{
-        res.render("products.hbs")
-    }
+    // else{
+    //     res.render("products.hbs")
+    // }
 
-    // res.render("products-admin.hbs")
+    res.render("products-admin.hbs")
     
 })
 
@@ -200,27 +200,27 @@ app.post("/filter", urlencoder, (req, res)=>{
     let filter = req.body.filter
     console.log(filter)
 
-    // if(req.session.email){
-    //     if(login == 1){
-    //         console.log("FILTER" +login)
-    //         res.render("filter-user.hbs", {
-    //             filter:filter
-    //         })
-    //     }
-    //     else if(login == 100){
-    //         // res.render("home-admin.hbs")
-    //     }
-    // }
+    if(req.session.email){
+        if(login == 1){
+            console.log("FILTER" +login)
+            res.render("filter-user.hbs", {
+                filter:filter
+            })
+        }
+        else if(login == 100){
+            // res.render("home-admin.hbs")
+        }
+    }
     
-    // else{
-    //     res.render("filter.hbs", {
-    //         filter:filter
-    //     })
-    // }  
+    else{
+        res.render("filter.hbs", {
+            filter:filter
+        })
+    }  
 
-    res.render("filter-user.hbs", {
-        filter:filter
-    })
+    // res.render("filter-user.hbs", {
+    //     filter:filter
+    // })
 
 })
 
@@ -613,6 +613,24 @@ app.get("/inventory", (req, res)=>{
     }
 })
 
+app.get("/addproductpage", (req, res)=>{
+    res.render("add-product-admin.hbs")
+})
+
+app.post("/addproduct", urlencoder, (req, res)=>{
+    console.log(req.body.product_name)
+    console.log(req.body.product_description)
+    console.log(req.body.product_ingredients)
+    console.log(req.body.product_6x6)
+    console.log(req.body.product_7x8)
+    console.log(req.body.product_10x12)
+    console.log(req.body.product_image)
+
+    res.render("home-admin.hbs")
+
+    
+})
+
 
 
 app.get("/signout", (req,res)=>{
@@ -743,7 +761,7 @@ function getOrderNumber(){
 }
 
 
-app.listen(process.env.PORT || 3000, function(){
+app.listen(3000, function(){
     console.log("now listening to port 3000")
 })
 
