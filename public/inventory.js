@@ -14,14 +14,36 @@ var firebaseConfig = {
 
 
 db.collection("inventory").get().then((snapshot) => {
-
-     document.getElementById('inventory').innerHTML+=`
+  snapshot.forEach((doc)=>{
+      document.getElementById('inventory').innerHTML+=`
      <div class="inventory-item" id="${doc.id}">
      <img src="" id="${doc.data().name.replace(/"/g,'')}" class="image-inv"
      <div>${doc.data().name}</div>
      <div class="inv-count">${doc.data().quantity}<div>`
+
+     firebase.auth().onAuthStateChanged(user => {
+       if(user){
+        // console.log('products/'+doc.id+'.jpg')
+        firebase.storage().ref('products/'+doc.id+'.jpg').getDownloadURL().then((imgUrl)=> {
+          var img = document.getElementById(id_name);
+          img.src= imgUrl
+         }).catch((err)=>{
+           firebase.storage().ref('products/'+doc.id+'.JPG').getDownloadURL().then((imgUrl)=> {
+             var img = document.getElementById(id_name);
+             img.src= imgUrl
+            })
+            //COMMENTED BECAUSE USED CATCH FOR, DIFFERENT KIND OF IMAGE TYPES
+           // console.log(err)
+         })
+       }
+     })
+  })
+   
 })
 
+
+let ul = document.getElementById('inventory-list');
+let li = ul.querySelectorAll('div.inventory-item');
 
 var email = "karl_david@dlsu.edu.ph";
 var password = "abcd1234";
