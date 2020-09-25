@@ -604,6 +604,50 @@ app.get("/myaccount", (req, res)=>{
     })
 })
 
+
+
+app.get("/addproductpage", (req, res)=>{
+    res.render("add-product-admin.hbs")
+})
+
+app.get("/addproduct", (req, res)=>{
+    res.render("products-admin.hbs")
+})
+
+app.post("/editproductpage", urlencoder, (req, res)=>{
+
+    db.collection("products").get().then((snapshot) => {
+        snapshot.forEach((doc) => {
+            if(doc.id == req.body.edit_id){
+                req.session.product = {
+                    name: doc.data().name,
+                    description: doc.data().description,
+                    ingredients: doc.data().ingredients,
+                    price6x6: parseFloat(doc.data().price6x6),
+                    price7x8: parseFloat(doc.data().price7x8),
+                    price10x12: parseFloat(doc.data().price10x12)
+                }
+            }
+
+        }, (err)=>{
+            console.log("Error is" +err)
+        })
+        res.render("edit-product-admin.hbs", {
+            product: req.session.product
+        })
+    }); 
+})
+
+app.post("/editproduct", urlencoder, (req, res)=>{
+    console.log(req.body.product_name)
+    console.log(req.body.product_description)
+    console.log(req.body.product_ingredients)
+    console.log(req.body.product_price6x6)
+    console.log(req.body.product_price7x8)
+    console.log(req.body.product_price10x12)
+    res.render("products-admin.hbs")
+})
+
 app.get("/users", (req, res)=>{
 
     let user={}
@@ -683,16 +727,6 @@ app.get("/inventory", (req, res)=>{
         }
     }
 })
-
-app.get("/addproductpage", (req, res)=>{
-    res.render("add-product-admin.hbs")
-})
-
-app.get("/addproduct", (req, res)=>{
-    res.render("products-admin.hbs")
-})
-
-
 
 
 app.get("/signout", (req,res)=>{

@@ -32,19 +32,21 @@
             <div class="edit-product-body">
                 <div class="edit-product-body-label">Edit product</div>
 
-                <form class="edit-product-form">
-                    <label>Name</label> <input class="input-product" type="text" name="product_name" value="Input name of sushi bake" required> <br>
-                    <label>Description</label> <input class="input-product" type="text" name="product_name" value="Input description of sushi bake" required> <br>
-                    <label>List of Ingredients</label> <input class="input-product" type="text" name="product_name" value="Input list of ingredients of the sushi bake" required> <br>
-                    <label>Price 6x6 inches</label> <input class="input-product" type="number" min=1 name="product_name" value="66" required> <br>
-                    <label id="product-price-7x8">7x8 inches</label> <input class="input-product" type="number" min=1 name="product_name" value="7" required> <br>
-                    <label id="product-price-10x12">10x12 inches</label> <input class="input-product" type="number" min=1 name="product_name" value="10" required> <br>
-                    <label id="product-photo">Photo</label> <input class="input-product" type="file" accept="image/*" name="product_name" value="" required> <br>
+                {{#if product}}
+                    <form class="edit-product-form" action="editproduct" method="post">    
+                        <label>Name</label> <input class="input-product" type="text" name="product_name" value="{{product.name}}" required> <br>
+                        <label>Description</label> <input class="input-product" type="text" name="product_description" value="{{product.description}}" required> <br>
+                        <label>List of Ingredients</label> <input class="input-product" type="text" name="product_ingredients" value="{{product.ingredients}}" required> <br>
+                        <label>Price 6x6 inches</label> <input class="input-product" type="number" min=1 name="product_price6x6" value="{{product.price6x6}}" required> <br>
+                        <label id="product-price-7x8">7x8 inches</label> <input class="input-product" type="number" min=1 name="product_price7x8" value="{{product.price7x8}}" required> <br>
+                        <label id="product-price-10x12">10x12 inches</label> <input class="input-product" type="number" min=1 name="product_price10x12" value="{{product.price10x12}}" required> <br>
+                        <label id="product-photo">Photo</label> <input class="input-product" type="file" accept="image/*" name="product_image" value="" required> <br>
 
-                    <!-- <label>Photo</label> <input class="input-product" type="file" onchange="chooseFile(event)" name="product_name" placeholder="Your name of product" required> <br> -->
+                        <!-- <label>Photo</label> <input class="input-product" type="file" onchange="chooseFile(event)" name="product_name" placeholder="Your name of product" required> <br> -->
 
-                    <input class="edit-product-btn" type="submit" value="EDIT">
-                </form>
+                        <input class="edit-product-btn" type="submit" value="EDIT">
+                    </form>
+                {{/if}}
             </div>
         </main>
         
@@ -63,7 +65,7 @@
         <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
         <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
 
-        <script src="products-admin.js"></script>
+        {{!-- <script src="products-admin.js"></script> --}}
 
 
     </body>

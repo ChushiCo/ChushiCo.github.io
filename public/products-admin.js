@@ -23,14 +23,18 @@ db.collection("products").get().then((snapshot) => {
     // console.log(id_name)
     
     document.getElementById('product-list').innerHTML+=`
-    <div class="product-item-admin" id="${doc.id}" onclick="viewDetails(this.id)"> 
+    <div class="product-item-admin" id="${doc.id}"> 
       <img src="" id="${doc.data().name.replace(/"/g, '')}" class="image_list">
       <div>${doc.data().name}</div>
       <div class="product-line"></div>
       <div class="product-item-price">₱  ${parseFloat(doc.data().price6x6).toFixed(2)} to ${parseFloat(doc.data().price10x12).toFixed(2)}</div>
-      <svg class="edit-product" id="${id_name}" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
-      <svg class="delete-product" id="${id_name}" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
-    </div>`;  
+      <svg onclick="editProduct()" class="edit-product" id="${doc.id}" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+      <svg class="delete-product" id="${doc.id}" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+    </div>
+    
+    <form id="edit-form" action="editproductpage" method="post" style="display:none">
+      <input type="hidden" name="edit_id" value="${doc.id}">
+    </form>`;  
     // console.log(doc.data());
     
 
@@ -178,12 +182,23 @@ $(document).ready(function(){
 })
 
 // FOR EDIT PRODUCT
-$(document).ready(function(){
-  $("svg.edit-product").click(function(){
-    console.log("EDIT CLICK")
-  })
+// $(document).ready(function(){
+//   $("svg.edit-product").click(function(){
+//     console.log("EDIT CLICK")
+//     $("form#edit-form").submit()
+    
+//   })
 
-})
+// })
+
+function editProduct(){
+
+  $(document).ready(function(){
+      console.log("EDIT CLICK")
+      $("form#edit-form").submit()
+  
+  })
+}
 
 
 
