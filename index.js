@@ -629,19 +629,19 @@ app.get("/addproductpage", (req, res)=>{
     res.render("add-product-admin.hbs")
 })
 
-app.post("/addproduct", urlencoder, (req, res)=>{
-    console.log(req.body.product_name)
-    console.log(req.body.product_description)
-    console.log(req.body.product_ingredients)
-    console.log(req.body.product_6x6)
-    console.log(req.body.product_7x8)
-    console.log(req.body.product_10x12)
-    console.log(req.body.product_image)
+// app.post("/addproduct", urlencoder, (req, res)=>{
+//     console.log(req.body.product_name)
+//     console.log(req.body.product_description)
+//     console.log(req.body.product_ingredients)
+//     console.log(req.body.product_6x6)
+//     console.log(req.body.product_7x8)
+//     console.log(req.body.product_10x12)
+//     console.log(req.body.product_image)
 
-    res.render("home-admin.hbs")
+//     res.render("home-admin.hbs")
 
     
-})
+// })
 
 
 
@@ -773,7 +773,7 @@ function getOrderNumber(){
 }
 
 
-app.listen(3000, function(){
+app.listen(process.env.PORT || 3000, function(){
     console.log("now listening to port 3000")
 })
 
