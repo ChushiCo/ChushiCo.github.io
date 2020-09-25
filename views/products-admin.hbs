@@ -1,0 +1,107 @@
+<html>
+    <head>
+        <title>View Products</title>
+        <meta content="text/htmlcharset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+        <link rel = "stylesheet" type = "text/css" href= "styles.css">
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    </head>
+
+    <body>
+        <header>
+            <div id="brand">
+                <img id="logo" src="img/logo.png">
+                <span id="name">CHUSHI</span>
+            </div>
+
+            <div id="tabs1">
+                <div><a href="home" method="get">HOME</a></div>
+                <div><a class="selected" href="catalog" method="get">PRODUCTS</a></div>
+                <div><a href="" method="get">USERS</a></div>
+                <div><a href="" method="get">INVENTORY</a></div>
+                <div><a href="" method="get">ORDERS</a></div>
+                <div class="signout-tab"><a href="signout" method="get">SIGN OUT</a></div>
+            </div> 
+        </header>
+
+        <main id="product-main-admin">
+            <div id="filter_bar-admin">
+                <form id="filter" method="post" action="filter">
+                        <div>
+                            <span id = "filter-heading">FILTER</span>
+                            <div class="line"></div>
+                            <label class="checkmark"><input class="filter" type="radio" name="filter" value="new" checked> New Products</label>
+                            <label class="checkmark"><input class="filter" type="radio" name="filter" value="popular"> Popularity</label>
+                        </div>
+
+                        <div class="category-heading">
+                            <div class="half-line-price"></div>
+                            <span class = "category-title">Price</span>
+                            <div class="half-line-price"></div>                     
+                            <label class="checkmark"><input  class="filter" type="radio" name="filter" value="low"> Lowest</label>
+                            <label class="checkmark"><input class="filter" type="radio" name="filter" value="high"> Highest</label>
+                        </div>
+
+                        <div class="category-heading">
+                            <div class="half-line-size"></div>
+                            <span class = "category-title"> Size </span>
+                            <div class="half-line-size"></div>                    
+                            <label class="checkmark"><input class="filter" type="radio" name="filter" value="6x6"> 6x6 inches</label>
+                            <label class="checkmark"><input class="filter" type="radio" name="filter" value="7x8"> 7x8 inches</label>
+                            <label class="checkmark"><input class="filter" type="radio" name="filter" value="10x12"> 10x12 inches</label>
+                        </div>
+                </form>
+            </div>
+    
+            <div id="header-title-admin"> 
+                <span id="title-name">SUSHI BAKES</span>
+                
+                <div class="search-container">
+                    <div class="search-box">
+                        <input type="text" id="searchInput" class="search-txt" placeholder="Search for shushi bakes"/>
+                        <a class="search-btn">
+                            <i class="fas fa-search"></i> 
+                        </a>
+                    </div>
+                 </div>
+            </div>
+
+            <div class="add-product">
+                <div class="add-product-div">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+                    <div class="add-product-label">Add Product</div>
+                </div> 
+            </div>
+
+            <div class="products-admin">
+                <div id="product-list"></div>
+            </div>
+        </main>
+
+        <main id="product-details">
+            <div id="specific-product-user"></div>
+        </main>
+        
+
+        
+
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
+
+        <!-- STORAGE VIDEO -->
+        <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-storage.js"></script>
+
+
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+            https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
+
+        <script src="products-admin.js"></script>
+
+
+    </body>
+</html>

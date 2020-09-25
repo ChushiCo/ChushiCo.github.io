@@ -1,12 +1,13 @@
 <html>
     <head>
-        <title>Welcome to Chushi!</title>
+        <title>View Products</title>
         <meta content="text/htmlcharset=utf-8" http-equiv="Content-Type">
         <meta content="utf-8" http-equiv="encoding">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
         <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
         <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
         <link rel = "stylesheet" type = "text/css" href= "styles.css">
-
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     </head>
 
     <body>
@@ -19,101 +20,23 @@
             <div id="tabs1">
                 <div><a href="home" method="get">HOME</a></div>
                 <div><a href="catalog" method="get">PRODUCTS</a></div>
-                <div><a href="ordertracker" method="get">ORDER TRACKER</a></div>
-                <div><a href="history" method="get">HISTORY</a></div>
-                <div><a class="selected" href="cart" method="get">CART</a></div>
-                <div><a href="myaccount" method="get">MY ACCOUNT</a></div>
-            </div>
+                <div><a class="selected" href="" method="get">USERS</a></div>
+                <div><a href="" method="get">INVENTORY</a></div>
+                <div><a href="" method="get">ORDERS</a></div>
+                <div class="signout-tab"><a href="signout" method="get">SIGN OUT</a></div>
+            </div> 
         </header>
 
-        <main id="checkout-cart">
-            <div class="checkout-header">CHECKOUT</div>
-
-            <div class="checkout-main">
-                <div class="checkout-address">
-                    <div class="checkout-address-header">Shipping Address</div>
-                    <div class="checkout-address-user">W.H. Taft Residences, Taft Ave, Malate, Room 38, Manila, 1004 Metro Manila
-
-                        <div class="checkout-new-address" id="new-address-btn">+ New Address</div>
-                    </div>
-                </div>
-
-                <div class="checkout-payment">
-                    <div class="checkout-payment-header">Payment Method</div>
-                    <div class="checkout-payment-method">
-                        <form id="payment">
-                            <label class="checkmark-payment"><input class="payment" type="radio" name="payment" value="cod" checked> Cash on Delivery</label>
-                            <label class="checkmark-payment"><input class="payment" type="radio" name="payment" value="cod"> Credit Card(Visa/Mastercard)</label>
-                        </form>
-                        
-                    </div>
-                </div>
-
-                <div class="checkout-date">
-                    <div class="checkout-date-header">Delivery Date & Time</div>
-                    <div class="checkout-date-time">08/24/2020 4:00 PM</div>
-                </div>
-
-
-                <div class="order-summary">
-                    <div class="order-summary-header">Order Summary
-                        <div class="order-items">2 Items in Cart</div>
-                    </div>
-                    <div class="order-summary-main">
-                        <div class="order-summary-list">
-                            <div class="order-item">Lotta Scallops (7x8 inches)</div>
-                            <div class="order-price">₱  658.00</div>
-                            <div class="order-quantity">Qty: 2</div>
-                        </div>
-                        
-                        <div class="order-subtotal-list">
-                            <div class="order-cart-subtotal-label">Cart Subtotal</div>
-                            <div class="order-cart-subtotal">₱  658.00</div>
-                        </div>
-                        
-
-                        <div class="order-total">
-                            <div class="order-total-label">Order Total</div>
-                            <div class="order-total-price">₱  658.00</div>    
-                        </div>
-
-                        <div class="place-order">
-                            Place Order
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-
-            <div id="address-modal" class="modalAddress">
-                <div class="modalAddress-content">
-      
-                    <div class="modalAddress-header">
-                        <h2>ADD A NEW ADDRESS</h2>
-                        <span class="address-closeBtn">&times;</span>
-                    </div>
-                    
-                    <div class="modalAddress-body">
-                        <form id="form-add-address" action="new-address" method="post">
-                            <input id="inputStreet" placeholder="Input street of address" type="text" required></input>
-                            <input id="inputBldg" placeholder="Input building and room of address" type="text" required></input>
-                            <input id="inputCity" placeholder="Input city of address" type="text" required></input>
-                            <div class="modalAddress-footer">
-                              <input id="submit-address" type="submit" value="ADD">
-                          </div>
-                        </form>
-                    </div>
-      
-                    
-                </div>
-            </div>
-
+        
+        <main id="users-main">
+            <div class="users-main-header">Manage Users</div>
         </main>
+        
 
-        <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
-        <script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js'></script>
-        <script  src="checkout.js"></script>
+        
+
+    
+
 
     </body>
 </html>

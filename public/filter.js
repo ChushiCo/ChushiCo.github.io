@@ -1,21 +1,3 @@
-//  let file = {};
-
-//  function chooseFile(e){
-//    file = e.target.files[0];
-//  }
- 
-//  function signUpButtonPressed(){
-      // firebase.storage().ref('products/'+file.name)
-//    firebase.storage().ref('products/'+'product1.jpg').put(file).then(function(){
-//     console.log("successfully uploaded") 
-//    }).catch(error => { 
-//      console.log(error.message)
-//    })
-//  }
-
-
- 
-
  // Your web app's Firebase configuration
  var firebaseConfig = {
     apiKey: "AIzaSyDu8b5oa9CNk5sDIofIbFFSD3iYjaLBq6k",

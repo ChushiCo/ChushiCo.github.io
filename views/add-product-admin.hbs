@@ -1,0 +1,70 @@
+<html>
+    <head>
+        <title>View Products</title>
+        <meta content="text/htmlcharset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+        <link rel = "stylesheet" type = "text/css" href= "styles.css">
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    </head>
+
+    <body>
+        <header>
+            <div id="brand">
+                <img id="logo" src="img/logo.png">
+                <span id="name">CHUSHI</span>
+            </div>
+
+            <div id="tabs1">
+                <div><a href="home" method="get">HOME</a></div>
+                <div><a class="selected" href="catalog" method="get">PRODUCTS</a></div>
+                <div><a href="" method="get">USERS</a></div>
+                <div><a href="" method="get">INVENTORY</a></div>
+                <div><a href="" method="get">ORDERS</a></div>
+                <div class="signout-tab"><a href="signout" method="get">SIGN OUT</a></div>
+            </div> 
+        </header>
+
+        
+        <main id="add-product-main">
+            <div class="add-product-body">
+                <div class="add-product-body-label">Add product</div>
+
+                <form class="add-product-form">
+                    <label>Name</label> <input class="input-product" type="text" name="product_name" placeholder="Input name of sushi bake" required> <br>
+                    <label>Description</label> <input class="input-product" type="text" name="product_description" placeholder="Input description of sushi bake" required> <br>
+                    <label>List of Ingredients</label> <input class="input-product" type="text" name="product_ingredients" placeholder="Input list of ingredients of the sushi bake" required> <br>
+                    <label>Price 6x6 inches</label> <input class="input-product" type="number" min=1 name="product_6x6" placeholder="Input the price of a 6x6 inch sushi bake" required> <br>
+                    <label id="product-price-7x8">7x8 inches</label> <input class="input-product" type="number" min=1 name="product_7x8" placeholder="Input the price of a 7x8 inch sushi bake" required> <br>
+                    <label id="product-price-10x12">10x12 inches</label> <input class="input-product" type="number" min=1 name="product_10x12" placeholder="Input the price of a 10x12 inch sushi bake" required> <br>
+                    <label id="product-photo">Photo</label> <input class="input-product" type="file" accept="image/*" name="product_image" required> <br>
+
+                    <!-- <label>Photo</label> <input class="input-product" type="file" onchange="chooseFile(event)" name="product_name" placeholder="Your name of product" required> <br> -->
+
+                    <input class="add-product-btn" type="submit" value="SUBMIT">
+                </form>
+            </div>
+        </main>
+        
+
+        
+
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
+
+        <!-- STORAGE VIDEO -->
+        <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-storage.js"></script>
+
+
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+            https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
+
+        {{!-- <script src="products-admin.js"></script> --}}
+
+
+    </body>
+</html>

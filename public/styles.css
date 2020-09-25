@@ -1290,8 +1290,6 @@ input[type=radio] {
     }
 }
 
-
-
 /* FOR ORDER TRACKER - USER */
 #tracker-main{
     padding: 20px 30px;
@@ -1574,4 +1572,258 @@ input[type=radio] {
     border: 3px solid black;
     border-radius: 35px;
     margin: 30px auto 0;
+}
+
+/* FOR ADMIN */
+.signout-tab a{
+    background: black;
+    color: #FFC178;
+    border-radius: 50px;
+    padding: 10px 16px;
+}
+
+#product-main-admin{
+    display: grid;
+    grid-template-columns: 210px 1fr;
+    grid-template-rows: 100px 50px 1fr;
+    height: 100%;
+    z-index: 100;
+}
+#filter_bar-admin{
+    grid-column: 1/2;
+    grid-row: 1/4;
+    background-color: black;
+
+    /* CHANGED WIDTH TO FIXED VALUE -KD*/
+    /* width: 13%; */
+    width: 200px;
+    height: 100%;
+    padding: 5px;
+}
+
+#header-title-admin{
+    grid-column: 2/3;
+    grid-row: 1/2;
+}
+
+.products-admin{
+    grid-column: 2/3;
+    grid-row: 3/4;
+}
+
+.add-product{
+    grid-column: 2/3;
+    grid-row: 2/3;
+
+    display: grid;
+    grid-template-columns: 80% 20%;
+}
+
+.add-product-div{
+    grid-column: 2/3;
+    cursor: pointer;
+}
+
+.add-product svg{
+    display: inline-block;
+    height: 45px;
+    width: 45px; 
+}
+
+.add-product-label{
+    display: inline-block;
+    font-size: 28px;
+    position: relative;
+    bottom: 12px;
+    color: black;
+}
+
+.add-product-div:hover{
+    color: #FFC178;
+    fill: #FFC178;
+}
+
+.product-item-admin{
+    display: inline-block;
+    height: auto;
+    width: 330px;
+    font-size: 25px;
+    margin: 40px 50px 0px;
+    border: 3px solid black;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.product-item-price{
+    margin-bottom: 10px;
+}
+
+.edit-product{
+    height: 45px;
+    width: 45px;
+    margin-left: 45%;
+}
+
+.edit-product:hover{
+    fill: #FFC178;
+}
+
+.delete-product{
+    height: 45px;
+    width: 45px;
+    margin-left: 5%;
+}
+
+.delete-product:hover{
+    fill: #FF0000;
+}
+
+/* FOR ADD PRODUCT - ADMIN */
+#add-product-main{
+    padding: 30px 100px 35px;
+}
+
+.add-product-body{
+    height: 600px;
+    width: 1238px;
+    background: #FFC178;
+    padding: 15px 40px;
+}
+
+.add-product-body-label{
+    font-size: 40px;
+    text-transform: uppercase;
+    text-align: center;
+    text-decoration: underline;
+    margin-bottom: 15px;
+}
+
+.add-product-form label{
+    font-size: 28px;
+    display: inline-block;
+    width: 250px;
+    text-align: left;
+ }
+
+ .add-product-form .input-product{
+    margin: 5px;
+    font-size: 28px;
+    padding: 10px 15px;
+    width: 72%;
+}
+
+#product-price-7x8{
+    font-size: 28px;
+    display: inline-block;
+    width: 180px;
+    text-align: left;
+    margin-left: 70px;
+}
+
+#product-price-10x12{
+    font-size: 28px;
+    display: inline-block;
+    width: 180px;
+    text-align: left;
+    margin-left: 70px;
+}
+
+#product-photo{
+    font-size: 28px;
+    display: inline-block;
+    width: 235px;
+    text-align: left;
+}
+
+form .add-product-btn{
+    display: block;
+    font-family: 'Roboto';
+    font-size: 33px;
+    padding: 5px 30px;
+    width: auto;
+    background: #C4C4C4;
+    border-radius: 30px;
+    margin: 0px 60px;
+    float: right;
+}
+
+/* FOR EDIT PRODUCT - ADMIN */
+#edit-product-main{
+    padding: 30px 100px 35px;
+}
+
+.edit-product-body{
+    height: 600px;
+    width: 1238px;
+    background: #FFC178;
+    padding: 15px 40px;
+}
+
+.edit-product-body-label{
+    font-size: 40px;
+    text-transform: uppercase;
+    text-align: center;
+    text-decoration: underline;
+    margin-bottom: 15px;
+}
+
+.edit-product-form label{
+    font-size: 28px;
+    display: inline-block;
+    width: 250px;
+    text-align: left;
+ }
+
+ .edit-product-form .input-product{
+    margin: 5px;
+    font-size: 28px;
+    padding: 10px 15px;
+    width: 72%;
+}
+
+#product-price-7x8{
+    font-size: 28px;
+    display: inline-block;
+    width: 180px;
+    text-align: left;
+    margin-left: 70px;
+}
+
+#product-price-10x12{
+    font-size: 28px;
+    display: inline-block;
+    width: 180px;
+    text-align: left;
+    margin-left: 70px;
+}
+
+#product-photo{
+    font-size: 28px;
+    display: inline-block;
+    width: 235px;
+    text-align: left;
+}
+
+form .edit-product-btn{
+    display: block;
+    font-family: 'Roboto';
+    font-size: 33px;
+    padding: 5px 30px;
+    width: auto;
+    background: #C4C4C4;
+    border-radius: 30px;
+    margin: 0px 60px;
+    float: right;
+   
+}
+
+/* FOR USERS - ADMIN */
+#users-main{
+    padding: 25px 20px;
+}
+
+.users-main-header{
+    font-size: 36px;
+    font-weight: bold;
+    text-transform: uppercase;
 }
