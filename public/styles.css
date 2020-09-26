@@ -1837,7 +1837,7 @@ form .edit-product-btn{
 }
 
 .users-main-header{
-    font-size: 36px;
+    font-size: 40px;
     font-weight: bold;
     text-transform: uppercase;
     margin-bottom: 20px;
@@ -1879,3 +1879,74 @@ form .edit-product-btn{
 }
 
 /* FOR INVENTORY - ADMIN */
+
+/* FOR ORDERS - ADMIN */
+#orders-main{
+    padding: 25px 35px;
+}
+
+.orders-header{
+    font-size: 40px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.total-orders{
+    font-size: 32px;
+    font-weight: bold;
+    position: absolute;
+    top: 100px;
+    right: 60px;
+}
+
+.orders-list{
+    background: #FFC178;
+    border: 3px solid black;
+    padding: 15px;
+
+    display: grid;
+    grid-template-columns: 15% 35% 20% 30%;
+    grid-template-rows: 55px 1fr 55px 1fr;
+}
+
+.order-label{
+    font-size: 28px;
+    font-weight: bold;
+}
+
+#order-item-label{
+    padding-bottom: 15px;
+}
+
+.order-detail{
+    font-size: 28px;
+}
+
+
+#order-address-label{
+    grid-column: 1/2;
+    grid-row: 3/5;
+}
+
+.order-address-detail{
+    font-size: 28px;
+    grid-column: 2/3;
+    grid-row: 3/5;
+    padding-right: 30px;
+}
+
+#order-progress-label{
+    grid-column: 3/4;
+    grid-row: 4/5;
+}
+
+.no-orders{
+    border: 3px solid black;
+    font-size: 26px;
+    font-weight: bold;
+    padding: 15px;
+}
+
+

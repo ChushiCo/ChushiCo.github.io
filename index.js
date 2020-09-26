@@ -684,30 +684,6 @@ app.get("/deleteuser", (req, res)=>{
     // res.render("products-admin.hbs")
 })
 
-app.get("/orders",(req,res)=>{
-    let orders=[]
-    if(login == 100){
-        db.collection("orders").get().then((snapshot)=>{
-            snapshot.forEach((doc)=>{
-                orders.push({
-                    address:doc.data().address,
-                    date:doc.data().date,
-                    number:doc.data().number,
-                    order:doc.data().order,
-                    ordered_by:doc.data().ordered_by,
-                    payment:doc.data().payment,
-                    progress:doc.data().progress,
-                    time:doc.data().time
-                })
-            })
-            res.render("orders.hbs",{
-                orders:orders
-    })
-        })
-    }
-
-})
-
 app.get("/inventory", (req, res)=>{
     let inventory=[]
     if (login == 100){
@@ -727,6 +703,39 @@ app.get("/inventory", (req, res)=>{
             console.log(err)
         }
     }
+})
+
+app.get("/orders",(req,res)=>{
+    let orders=[]
+    let quantity = 0
+    db.collection("orders").get().then((snapshot)=>{
+        snapshot.forEach((doc)=>{
+            orders.push({
+                number:doc.data().number,
+                time:doc.data().time,
+                ordered_by:doc.data().ordered_by,
+                order:doc.data().order,
+                address:doc.data().address,
+                payment: parseFloat(doc.data().payment),
+                method:doc.data().method,
+                progress:doc.data().progress
+                
+            })
+            quantity++
+        }, (err)=>{
+            console.log("Error is" +err)
+        })
+        
+        // for(let i=0; i< orders.length+1; i++){
+        //     console.log(i)
+        // }
+
+        res.render("orders.hbs",{
+            orders:orders,
+            total_orders: quantity
+        })
+    })
+
 })
 
 

@@ -1,4 +1,16 @@
-<html> 
+<html>
+    <head>
+        <title>View Products</title>
+        <meta content="text/htmlcharset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+        <link rel = "stylesheet" type = "text/css" href= "styles.css">
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    </head>
+
+    <body>
         <header>
             <div id="brand">
                 <img id="logo" src="img/logo.png">
@@ -8,30 +20,56 @@
             <div id="tabs1">
                 <div><a href="home" method="get">HOME</a></div>
                 <div><a href="catalog" method="get">PRODUCTS</a></div>
-                <div><a href="" method="get">USERS</a></div>
+                <div><a href="users" method="get">USERS</a></div>
                 <div><a href="inventory" method="get">INVENTORY</a></div>
-                <div><a class="selected"href="orders" method="get">ORDERS</a></div>
+                <div><a class="selected" href="orders" method="get">ORDERS</a></div>
                 <div class="signout-tab"><a href="signout" method="get">SIGN OUT</a></div>
-            </div>
+            </div>  
         </header>
 
-        <body>
-            <div class="orders">
-                <div id="orders-list">">{{#each orders}}{{this.address}}{{this.date}}{{this.number}}{{this.order}}{{this.ordered_by}}{{this.payment}}{{this.progress}}{{this.time}}<br>{{/each}}</div>
-            </div>
-        </body>
-         <!-- The core Firebase JS SDK is always required and must be listed first -->
-        <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
-
-        <!-- STORAGE VIDEO -->
-        <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-storage.js"></script>
-
-
-        <!-- TODO: Add SDKs for Firebase products that you want to use
-            https://firebase.google.com/docs/web/setup#available-libraries -->
-        <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
-        <script src="orders.js"></script>
         
+        <main id="orders-main">
+            <div class="orders-header">ORDERS</div>
+            {{#if total_orders}}
+                <div class="total-orders">Total orders: {{total_orders}}</div>
+            {{/if}}
+
+            {{#unless total_orders}}
+                <div class="no-orders">No orders yet</div>
+            {{/unless}}
+            
+
+            {{#each orders}}
+                <div class="orders-list">
+
+                    <div class="order-label" id="order-number-label">Order Number</div>
+                    <div class="order-detail">{{number}}</div>
+
+                    <div class="order-label" id="order-date-label">Date and Time</div>
+                    <div class="order-detail">{{time}}</div>
+
+                    <div class="order-label" id="order-by-label">Ordered by</div>
+                    <div class="order-detail">{{ordered_by}}</div>
+
+                    <div class="order-label" id="order-item-label">Order</div>
+                    <div class="order-detail">{{order}}</div>
+
+                    <div class="order-label" id="order-address-label">Address</div>
+                    <div class="order-address-detail">{{address}}</div>
+
+                    <div class="order-label" id="order-payment-label">Payment</div>
+                    <div class="order-detail">₱{{payment}} ({{method}})</div>
+
+                    <div class="order-label" id="order-progress-label">Progress</div>
+                    <div class="order-detail">{{progress}}</div>
+
+                </div>
+            {{/each}}
+            
+
+            
+        </main>
+
+
+    </body>
 </html>
-        
