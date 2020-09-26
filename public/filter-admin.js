@@ -16,6 +16,7 @@ var db = firebase.firestore();
 // FOR NEW
 db.collection("products").get().then((snapshot) => {
   let x=1
+  let y=1000
   snapshot.forEach((doc) => {
 
     let object = doc.data();
@@ -35,9 +36,13 @@ db.collection("products").get().then((snapshot) => {
     
     <form id="${x}" action="editproductpage" method="post" style="display:none">
       <input type="hidden" name="edit_id" value="${doc.id}">
+    </form>
+    <form id="${y}" action="deleteproduct" method="get" style="display:none">
+      <input type="hidden" name="delete_id" value="${doc.id}">
     </form>`;  
-    // console.log(doc.data());
     x++
+    y++  
+
 
     firebase.auth().onAuthStateChanged(user => {
       if(user){
@@ -62,6 +67,7 @@ db.collection("products").get().then((snapshot) => {
 // FOR POPULAR
 db.collection("products").orderBy("orders","desc").get().then((snapshot) => {
   let x=1
+  let y=1000
   snapshot.forEach((doc) => {
 
     let object = doc.data();
@@ -79,8 +85,13 @@ db.collection("products").orderBy("orders","desc").get().then((snapshot) => {
 
     <form id="${x}" action="editproductpage" method="post" style="display:none">
       <input type="hidden" name="edit_id" value="${doc.id}">
+    </form>
+
+    <form id="${y}" action="deleteproduct" method="get" style="display:none">
+      <input type="hidden" name="delete_id" value="${doc.id}">
     </form>`;  
     x++
+    y++
 
     firebase.auth().onAuthStateChanged(user => {
       if(user){
@@ -102,6 +113,7 @@ db.collection("products").orderBy("orders","desc").get().then((snapshot) => {
 // FOR LOW
 db.collection("products").orderBy("price6x6","asc").get().then((snapshot) => {
   let x=1
+  let y=1000
   snapshot.forEach((doc) => {
 
     let object = doc.data();
@@ -119,8 +131,13 @@ db.collection("products").orderBy("price6x6","asc").get().then((snapshot) => {
     
     <form id="${x}" action="editproductpage" method="post" style="display:none">
       <input type="hidden" name="edit_id" value="${doc.id}">
+    </form>
+    
+    <form id="${y}" action="deleteproduct" method="get" style="display:none">
+      <input type="hidden" name="delete_id" value="${doc.id}">
     </form>`;  
     x++
+    y++
 
     firebase.auth().onAuthStateChanged(user => {
       if(user){
@@ -142,6 +159,7 @@ db.collection("products").orderBy("price6x6","asc").get().then((snapshot) => {
 // FOR HIGH
 db.collection("products").orderBy("price10x12","desc").get().then((snapshot) => {
   let x=1
+  let y=1000
     snapshot.forEach((doc) => {
   
       let object = doc.data();
@@ -159,8 +177,13 @@ db.collection("products").orderBy("price10x12","desc").get().then((snapshot) => 
     
       <form id="${x}" action="editproductpage" method="post" style="display:none">
         <input type="hidden" name="edit_id" value="${doc.id}">
+      </form>
+    
+      <form id="${y}" action="deleteproduct" method="get" style="display:none">
+        <input type="hidden" name="delete_id" value="${doc.id}">
       </form>`;  
       x++
+      y++
   
       firebase.auth().onAuthStateChanged(user => {
         if(user){
@@ -182,6 +205,7 @@ db.collection("products").orderBy("price10x12","desc").get().then((snapshot) => 
 // FOR 6x6
 db.collection("products").orderBy("price10x12","desc").get().then((snapshot) => {
   let x=1
+  let y=1000
     snapshot.forEach((doc) => {
   
       let object = doc.data();
@@ -199,8 +223,13 @@ db.collection("products").orderBy("price10x12","desc").get().then((snapshot) => 
     
       <form id="${x}" action="editproductpage" method="post" style="display:none">
         <input type="hidden" name="edit_id" value="${doc.id}">
+      </form>
+    
+      <form id="${y}" action="deleteproduct" method="get" style="display:none">
+        <input type="hidden" name="delete_id" value="${doc.id}">
       </form>`;  
       x++
+      y++
   
       firebase.auth().onAuthStateChanged(user => {
         if(user){
@@ -223,6 +252,7 @@ db.collection("products").orderBy("price10x12","desc").get().then((snapshot) => 
 // FOR 7x8
 db.collection("products").orderBy("price10x12","desc").get().then((snapshot) => {
   let x=1
+  let y=1000
     snapshot.forEach((doc) => {
   
       let object = doc.data();
@@ -240,8 +270,13 @@ db.collection("products").orderBy("price10x12","desc").get().then((snapshot) => 
     
       <form id="${x}" action="editproductpage" method="post" style="display:none">
         <input type="hidden" name="edit_id" value="${doc.id}">
+      </form>
+    
+      <form id="${y}" action="deleteproduct" method="get" style="display:none">
+        <input type="hidden" name="delete_id" value="${doc.id}">
       </form>`;  
       x++
+      y++
   
       firebase.auth().onAuthStateChanged(user => {
         if(user){
@@ -263,6 +298,7 @@ db.collection("products").orderBy("price10x12","desc").get().then((snapshot) => 
   // FOR 10x12
 db.collection("products").orderBy("price10x12","desc").get().then((snapshot) => {
   let x=1
+  let y=1000
     snapshot.forEach((doc) => {
   
       let object = doc.data();
@@ -280,8 +316,13 @@ db.collection("products").orderBy("price10x12","desc").get().then((snapshot) => 
     
       <form id="${x}" action="editproductpage" method="post" style="display:none">
         <input type="hidden" name="edit_id" value="${doc.id}">
+      </form>
+    
+      <form id="${y}" action="deleteproduct" method="get" style="display:none">
+        <input type="hidden" name="delete_id" value="${doc.id}">
       </form>`;  
       x++
+      y++
   
       firebase.auth().onAuthStateChanged(user => {
         if(user){
@@ -583,6 +624,23 @@ function editProduct(id){
       console.log("form#"+id)
       $("form#"+id).submit()
   })
+}
+
+// FOR DELETE PRODUCT
+function deleteProduct(id, product_id){
+  console.log(product_id)
+  console.log("form#"+id)
+  db.collection("products").doc(product_id).delete().then(function(){
+    console.log("Item deleted");
+  }).then(function(doc) {
+    console.log("Document deleted with UID: " +product_id);
+    $(document).ready(function(){
+      $("form#"+id).submit()
+  })
+  })
+  .catch(function(error){
+    console.log("Error in deleting item :"+error);
+  });
 }
 
 // FOR ADD TO CART

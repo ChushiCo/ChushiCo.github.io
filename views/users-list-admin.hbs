@@ -45,24 +45,29 @@
                     <div class="users-list">+{{mob_num}}</div>
                     <div class="users-list">{{role}}</div>
                     <div class="users-list">{{date_start}}</div>
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+                    <svg onclick="deleteUser('{{id}}')" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
                 </div>
             {{/each}}
+
+            <form id="delete-user-form" action="deleteuser" method="get" style="display:none">
+            </form>
             
             
         </main>
         
-    
-        {{!-- <div class="users-main-list">
-                <div class="users-list">Niall Dela Cruz</div>
-                <div class="users-list">delacruzniall@gmail.com</div>
-                <div class="users-list">+639173082020</div>
-                <div class="users-list">Client</div>
-                <div class="users-list">August 8, 2020</div>
-                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
-            </div> --}}
 
-    
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
+
+        <!-- STORAGE VIDEO -->
+        <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-storage.js"></script>
+
+
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+            https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
+        <script src="users-admin.js"></script>
 
 
     </body>

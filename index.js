@@ -611,7 +611,8 @@ app.get("/addproductpage", (req, res)=>{
 })
 
 app.get("/addproduct", (req, res)=>{
-    res.render("products-admin.hbs")
+    res.redirect("/catalog")
+    // res.render("products-admin.hbs")
 })
 
 app.post("/editproductpage", urlencoder, (req, res)=>{
@@ -633,7 +634,6 @@ app.post("/editproductpage", urlencoder, (req, res)=>{
         }, (err)=>{
             console.log("Error is" +err)
         })
-        // console.log(req.session.product)
         res.render("edit-product-admin.hbs", {
             product: req.session.product
         })
@@ -641,42 +641,47 @@ app.post("/editproductpage", urlencoder, (req, res)=>{
 })
 
 app.get("/editproduct", (req,res)=>{
-    res.render("products-admin.hbs")
+    res.redirect("/catalog")
+    // res.render("products-admin.hbs")
+})
+
+app.get("/deleteproduct", (req, res)=>{
+    res.redirect("/catalog")
+    // res.render("products-admin.hbs")
 })
 
 app.get("/users", (req, res)=>{
 
     let user={}
 
-    if(!req.session.users){
+        // if(!req.session.users){ }
         req.session.users = []
 
-        db.collection("users").orderBy("date_digit","desc").get().then((snapshot) => {
-            snapshot.forEach((doc) => {
-                user = {
-                    first_name: doc.data().first_name,
-                    last_name: doc.data().last_name,
-                    email: doc.data().email,
-                    mob_num: doc.data().mob_num,
-                    role: doc.data().role,
-                    date_start: doc.data().date_start
-                }
-                req.session.users.push(user)    
-            }, (err)=>{
-                console.log("Error is" +err)
-            })
-            res.render("users-list-admin.hbs", {
-                users: req.session.users
-            })
-        }); 
-    }
-
-    else{
-        res.render("users-list-admin.hbs",{
+    db.collection("users").orderBy("date_digit","desc").get().then((snapshot) => {
+        snapshot.forEach((doc) => {
+            user = {
+                id: doc.id,
+                first_name: doc.data().first_name,
+                last_name: doc.data().last_name,
+                email: doc.data().email,
+                mob_num: doc.data().mob_num,
+                role: doc.data().role,
+                date_start: doc.data().date_start
+            }
+            req.session.users.push(user)    
+        }, (err)=>{
+            console.log("Error is" +err)
+        })
+        res.render("users-list-admin.hbs", {
             users: req.session.users
-        })  
-    }
+        })
+    }); 
 
+})
+
+app.get("/deleteuser", (req, res)=>{
+    res.redirect("/users")
+    // res.render("products-admin.hbs")
 })
 
 app.get("/orders",(req,res)=>{
