@@ -730,7 +730,7 @@ app.get("/orders",(req,res)=>{
         //     console.log(i)
         // }
 
-        res.render("orders.hbs",{
+        res.render("orders-admin.hbs",{
             orders:orders,
             total_orders: quantity
         })
