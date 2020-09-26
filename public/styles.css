@@ -1879,6 +1879,174 @@ form .edit-product-btn{
 }
 
 /* FOR INVENTORY - ADMIN */
+#inventory-main{
+    padding: 25px 35px;
+}
+
+.inventory-header{
+    font-size: 40px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.add-inventory{
+    text-transform: uppercase;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 100px;
+    right: 60px;
+}
+
+.add-inventory a{
+    text-decoration: none;
+}
+
+.add-inventory svg{
+    height: 40px;
+    width: 40px;
+    position: relative;
+    top: 10px;
+}
+
+.add-inventory-label{
+    display: inline-block;
+}
+
+.add-inventory:hover{
+    fill: #FFC178;
+    color: #FFC178;
+}
+
+.add-inventory a:hover{
+    fill: #FFC178;
+    color: #FFC178;
+}
+
+.add-inventory svg:hover{
+    fill: #FFC178;
+    color: #FFC178;
+}
+
+.add-inventory-label:hover{
+    color: #FFC178;
+}
+
+
+.inventory-item{
+    display: inline-block;
+    height: auto;
+    width: 330px;
+    font-size: 25px;
+    margin: 40px 11px 0px;
+    border: 3px solid black;
+    text-align: center;
+    padding-bottom: 20px;
+    background: #FFC178;
+}
+
+.inventory-item-name{
+    margin-bottom: 10px;
+}
+
+.image_list_inventory{
+    margin-bottom: 15px;
+    height: 200px;
+    width: 100%;
+}
+
+/* .inventory-quantity{
+    margin:100px;
+} */
+
+span {cursor:pointer; }
+
+.inventory-quantity-input{
+    height:34px;
+    width: 60px;
+    text-align: center;
+    font-size: 26px;
+	border:1px solid #ddd;
+	border-radius:4px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.quantity-subtract, .quantity-add{
+    width:30px;
+	height:30px;
+	background:#FFC178;
+	border-radius:4px;
+	padding:8px 5px 8px 5px;
+	border:3px solid black;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 28px;
+}
+
+/* 
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(330px, 1fr));
+    justify-content: center; 
+    
+*/
+
+/* FOR ADD INVENTORY - ADMIN */
+#add-item-main{
+    padding: 50px 100px 50px;
+}
+
+.add-item-body{
+    height: 550px;
+    width: 1238px;
+    background: #FFC178;
+    padding: 15px 40px;
+}
+
+.add-item-body-label{
+    font-size: 40px;
+    text-transform: uppercase;
+    text-align: center;
+    text-decoration: underline;
+    margin:15px 0 40px;
+}
+
+.add-item-form label{
+    font-size: 28px;
+    display: inline-block;
+    width: 250px;
+    text-align: left;
+ }
+
+ .add-item-form .input-item{
+    margin: 5px 0 30px;
+    font-size: 28px;
+    padding: 10px 15px;
+    width: 72%;
+}
+
+#item-photo{
+    font-size: 28px;
+    display: inline-block;
+    width: 235px;
+    text-align: left;
+}
+
+form .add-item-btn{
+    display: block;
+    font-family: 'Roboto';
+    font-size: 33px;
+    padding: 5px 30px;
+    width: auto;
+    background: #C4C4C4;
+    border-radius: 30px;
+    margin: 15px 55px;
+    float: right;
+}
 
 /* FOR ORDERS - ADMIN */
 #orders-main{

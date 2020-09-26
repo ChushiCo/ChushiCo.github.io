@@ -24,34 +24,31 @@
                 <div><a class="selected" href="inventory" method="get">INVENTORY</a></div>
                 <div><a href="orders" method="get">ORDERS</a></div>
                 <div class="signout-tab"><a href="signout" method="get">SIGN OUT</a></div>
-            </div> 
+            </div>  
         </header>
 
         
-        <main id="add-item-main">
-            <div class="add-item-body">
-                <div class="add-item-body-label">Add item to inventory</div>
-
-                <form class="add-item-form">
-
-                    <label>Name</label> <input class="input-item" id="item_name" type="text" name="item_name" placeholder="Input name of item" required> <br>
-                    <label>Quantity</label> <input class="input-item"  id="item_quantity" type="number" name="item_quantity" placeholder="Input quantity of item" min=0 required> <br>
-                    
-                    <label id="item-photo">Photo</label> <input class="input-item" type="file"  onchange="chooseFile(event)" accept="image/*" name="product_image" required> <br>
-                    <input class="add-product-btn" id="add-btn" type="submit" value="ADD">
-
-                </form>
-
-                <form method="get" action="additem" id="add-item-form">
-                    <input type="hidden">
-                </form>
+        <main id="inventory-main">
+            <div class="inventory-header">INVENTORY</div>
+            <div class="add-inventory">
+                <a href="addinventorypage" method="get">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+                <div class="add-inventory-label">Add item</div>
+                </a>
             </div>
+
+            <div class="inventory-body">
+                <div id="inventory-list"></div>
+
+            </div>
+
+            
         </main>
         
 
-        
+    </body>
 
-        <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
         <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
 
         <!-- STORAGE VIDEO -->
@@ -62,9 +59,5 @@
             https://firebase.google.com/docs/web/setup#available-libraries -->
         <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
         <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
-
-        <script src="add-inventory-admin.js"></script>
-
-
-    </body>
+        <script src="inventory-admin.js"></script>
 </html>

@@ -685,25 +685,36 @@ app.get("/deleteuser", (req, res)=>{
 })
 
 app.get("/inventory", (req, res)=>{
-    let inventory=[]
-    if (login == 100){
-        db.collection("inventory").get().then((snapshot)=>{
-            snapshot.forEach((doc)=>{
-                inventory.push({
-                    name: doc.data().name,
-                    quantity: doc.data().quantity
-                })
-            })
-            res.render("inventory.hbs",{
-                inventory:inventory
-            })
+    res.render("inventory-admin.hbs")
+    // let inventory=[]
+    // if (login == 100){
+    //     db.collection("inventory").get().then((snapshot)=>{
+    //         snapshot.forEach((doc)=>{
+    //             inventory.push({
+    //                 name: doc.data().name,
+    //                 quantity: doc.data().quantity
+    //             })
+    //         })
+    //         res.render("inventory-admin.hbs",{
+    //             inventory:inventory
+    //         })
 
-        })
-        ,(err)=>{
-            console.log(err)
-        }
-    }
+    //     })
+    //     ,(err)=>{
+    //         console.log(err)
+    //     }
+    // }
 })
+
+app.get("/addinventorypage", (req, res)=>{
+    res.render("add-inventory-admin.hbs")
+})
+
+app.get("/additem", (req, res)=>{
+    res.redirect("/inventory")
+    // res.render("products-admin.hbs")
+})
+
 
 app.get("/orders",(req,res)=>{
     let orders=[]
