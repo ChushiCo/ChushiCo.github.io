@@ -1,0 +1,188 @@
+<html>
+    <head>
+        <title>Chushi | Order</title>
+        <meta content="text/htmlcharset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+        <link rel = "stylesheet" type = "text/css" href= "styles.css">
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+        <style>
+            {{#if order}}
+                {{#if_equal order.progress "Order Received"}}
+                    #one{
+                        border: 3px solid black;
+                        padding: 5px 80px;
+                        background: #FFC178;
+                        cursor: pointer;
+                    }
+                {{/if_equal}}
+
+                {{#if_equal order.progress "Preparing sushi bake"}}
+                    #one{
+                            border: 3px solid black;
+                            padding: 5px 80px;
+                            background: #FFC178;
+                            cursor: pointer;
+                        }
+
+                    #two{
+                        border: 3px solid black;
+                        padding: 5px 80px;
+                        background: #FFC178;
+                        cursor: pointer;
+                    }
+                {{/if_equal}}
+
+                {{#if_equal order.progress "Delivery on its way"}}
+                    #one{
+                            border: 3px solid black;
+                            padding: 5px 80px;
+                            background: #FFC178;
+                            cursor: pointer;
+                        }
+                        
+                    #two{
+                        border: 3px solid black;
+                        padding: 5px 80px;
+                        background: #FFC178;
+                        cursor: pointer;
+                    }
+
+                    #three{
+                        border: 3px solid black;
+                        padding: 5px 80px;
+                        background: #FFC178;
+                        cursor: pointer;
+                    }
+                {{/if_equal}}
+
+                {{#if_equal order.progress "Delivered"}}
+                    #one{
+                            border: 3px solid black;
+                            padding: 5px 80px;
+                            background: #FFC178;
+                            cursor: pointer;
+                        }
+                        
+                    #two{
+                        border: 3px solid black;
+                        padding: 5px 80px;
+                        background: #FFC178;
+                        cursor: pointer;
+                    }
+
+                    #three{
+                        border: 3px solid black;
+                        padding: 5px 80px;
+                        background: #FFC178;
+                        cursor: pointer;
+                    }
+
+                    #four{
+                        border: 3px solid black;
+                        padding: 5px 80px;
+                        background: #FFC178;
+                        cursor: pointer;
+                    }
+                {{/if_equal}}
+
+
+            {{/if}}
+        </style>
+    </head>
+
+    <body>
+        <header>
+            <div id="brand">
+                <img id="logo" src="img/logo.png">
+                <span id="name">CHUSHI</span>
+            </div>
+
+            <div id="tabs1">
+                <div><a href="home" method="get">HOME</a></div>
+                <div><a href="catalog" method="get">PRODUCTS</a></div>
+                <div><a href="users" method="get">USERS</a></div>
+                <div><a href="inventory" method="get">INVENTORY</a></div>
+                <div><a class="selected" href="orders" method="get">ORDERS</a></div>
+                <div class="signout-tab"><a href="signout" method="get">SIGN OUT</a></div>
+            </div>  
+        </header>
+
+        
+        <main id="order-main">
+            <div class="order-header">ORDER</div>
+
+        
+            <div class="order-list">
+                {{#if order}}
+                    <div class="specific-order-label" id="specific-order-number-label">Order Number</div>
+                    <div class="specific-order-detail">{{order.number}}</div>
+
+                    <div class="specific-order-label" id="specific-order-date-label">Date and Time</div>
+                    <div class="specific-order-detail">{{order.time}}</div>
+                
+                    <div class="specific-order-label" id="specific-order-by-label">Ordered by</div>
+                    <div class="specific-order-detail">{{order.ordered_by}}</div>
+
+                    <div class="specific-order-label" id="specific-order-item-label">Order</div>
+                    <div class="specific-order-detail">{{order.order}}</div>
+
+                    <div class="specific-order-label" id="specific-order-address-label">Address</div>
+                    <div class="specific-order-address-detail">{{order.address}}</div>
+
+                    <div class="specific-order-label" id="specific-order-payment-label">Payment</div>
+                    <div class="specific-order-detail">₱{{order.payment}} ({{order.method}})</div>
+
+                    <div class="specific-order-label" id="specific-order-progress-label">Progress</div>
+                    <div class="specific-order-detail">{{order.progress}}</div>
+                {{/if}}
+            </div>
+
+            <div class="order-header">STATUS</div>
+            
+            <div class="order-status">
+
+                <div class="status-detail"  id="one"  onclick="changeStatus('{{order.id}}', '1')">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0zm0 0h24v24H0V0z" fill="none"/><path d="M16.59 7.58L10 14.17l-3.59-3.58L5 12l5 5 8-8zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg>
+                    <div class="status-detail-name">Order Received</div>
+                </div>
+                <div class="status-detail" id="two" onclick="changeStatus('{{order.id}}', '2')">
+                    <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24"><g><rect fill="none" height="24" width="24"/></g><g><g><path d="M17,22c1.66,0,3-1.34,3-3s-1.34-3-3-3c-1.3,0-2.4,0.84-2.82,2H9.14l1.99-3.06C11.42,14.98,11.71,15,12,15 s0.58-0.02,0.87-0.06l1.02,1.57c0.42-0.53,0.96-0.95,1.6-1.21l-0.6-0.93C17.31,13.27,19,10.84,19,8H5c0,2.84,1.69,5.27,4.12,6.37 l-3.95,6.08c-0.3,0.46-0.17,1.08,0.29,1.38h0c0.46,0.3,1.08,0.17,1.38-0.29l1-1.55h6.34C14.6,21.16,15.7,22,17,22z M17,18 c0.55,0,1,0.45,1,1c0,0.55-0.45,1-1,1s-1-0.45-1-1C16,18.45,16.45,18,17,18z"/><path d="M9.41,7h1c0.15-1.15,0.23-1.64-0.89-2.96C9.1,3.54,8.84,3.27,9.06,2H8.07C7.86,3.11,8.1,4.05,8.96,4.96 C9.18,5.2,9.75,5.63,9.41,7z"/><path d="M11.89,7h1c0.15-1.15,0.23-1.64-0.89-2.96c-0.42-0.5-0.68-0.78-0.46-2.04h-0.99c-0.21,1.11,0.03,2.05,0.89,2.96 C11.67,5.2,12.24,5.63,11.89,7z"/><path d="M14.41,7h1c0.15-1.15,0.23-1.64-0.89-2.96C14.1,3.54,13.84,3.27,14.06,2h-0.99c-0.21,1.11,0.03,2.05,0.89,2.96 C14.18,5.2,14.75,5.63,14.41,7z"/></g></g></svg>
+                    <div class="status-detail-name">Preparing sushi bake</div>
+                </div>
+                <div class="status-detail" id="three" onclick="changeStatus('{{order.id}}', '3')">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M15.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM5 12c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm0 8.5c-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.5-3.5 3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5zm5.8-10l2.4-2.4.8.8c1.3 1.3 3 2.1 5.1 2.1V9c-1.5 0-2.7-.6-3.6-1.5l-1.9-1.9c-.5-.4-1-.6-1.6-.6s-1.1.2-1.4.6L7.8 8.4c-.4.4-.6.9-.6 1.4 0 .6.2 1.1.6 1.4L11 14v5h2v-6.2l-2.2-2.3zM19 12c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm0 8.5c-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.5-3.5 3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5z"/></svg>
+                    <div class="status-detail-name">Delivery on its way</div>
+                </div>
+                <div class="status-detail" id="four" onclick="changeStatus('{{order.id}}', '4')">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z"/></svg>
+                    <div class="status-detail-name">Order Received</div>
+                </div>
+
+            </div>
+
+            <form method="post" action="order" id="order-progress-form">
+                    <input type="hidden" name="order_id" value="{{order.id}}">
+                </form>
+
+            
+        </main>
+
+
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
+
+        <!-- STORAGE VIDEO -->
+        <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-storage.js"></script>
+
+
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+            https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
+        <script src="detail-order-admin.js"></script>
+    </body>
+</html>

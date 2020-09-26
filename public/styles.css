@@ -1957,10 +1957,6 @@ form .edit-product-btn{
     width: 100%;
 }
 
-/* .inventory-quantity{
-    margin:100px;
-} */
-
 span {cursor:pointer; }
 
 .inventory-quantity-input{
@@ -1986,14 +1982,6 @@ span {cursor:pointer; }
     text-align: center;
     font-size: 28px;
 }
-
-/* 
-
-    display: grid;
-    grid-template-columns: repeat(auto-fill,minmax(330px, 1fr));
-    justify-content: center; 
-    
-*/
 
 /* FOR ADD INVENTORY - ADMIN */
 #add-item-main{
@@ -2073,10 +2061,15 @@ form .add-item-btn{
     background: #FFC178;
     border: 3px solid black;
     padding: 15px;
+    cursor: pointer;
 
     display: grid;
     grid-template-columns: 15% 35% 20% 30%;
     grid-template-rows: 55px 1fr 55px 1fr;
+}
+
+.orders-list:hover{
+    background: #ffa63d;
 }
 
 .order-label{
@@ -2117,4 +2110,90 @@ form .add-item-btn{
     padding: 15px;
 }
 
+/* FOR SPECIFIC ORDER - ADMIN */
+#order-main{
+    padding: 25px 35px;
+}
+
+.order-header{
+    font-size: 40px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.order-list{
+    background: #FFC178;
+    border: 3px solid black;
+    padding: 15px;
+    margin-bottom: 25px;
+
+    display: grid;
+    grid-template-columns: 15% 35% 20% 30%;
+    grid-template-rows: 55px 1fr 55px 1fr;
+}
+
+.specific-order-label{
+    font-size: 28px;
+    font-weight: bold;
+}
+
+#specific-order-item-label{
+    padding-bottom: 15px;
+}
+
+.specific-order-detail{
+    font-size: 28px;
+}
+
+
+#specific-order-address-label{
+    grid-column: 1/2;
+    grid-row: 3/5;
+}
+
+.specific-order-address-detail{
+    font-size: 28px;
+    grid-column: 2/3;
+    grid-row: 3/5;
+    padding-right: 30px;
+}
+
+#order-progress-label{
+    grid-column: 3/4;
+    grid-row: 4/5;
+}
+
+/* .order-status{
+    background: #FFC178;
+    border: 3px solid black;
+    padding: 15px;
+} */
+
+.status-detail{
+    border: 3px solid black;
+    padding: 5px 80px;
+    background: #C4C4C4;
+    cursor: pointer;
+}
+
+/* .status-detail:hover{
+    background: #FFC178;
+} */
+
+.status-detail svg{
+    height: 60px;
+    width: 60px;
+    position: relative;
+    top: 3px;
+}
+
+.status-detail-name{
+    display: inline-block;
+    font-size: 36px;
+    position: relative;
+    bottom: 10px;
+    margin-left: 10px;
+}
 

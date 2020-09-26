@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>View Products</title>
+        <title>Chushi | Orders</title>
         <meta content="text/htmlcharset=utf-8" http-equiv="Content-Type">
         <meta content="utf-8" http-equiv="encoding">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
@@ -40,7 +40,7 @@
             
 
             {{#each orders}}
-                <div class="orders-list">
+                <div class="orders-list" id="{{id}}"  onclick="viewOrder({{@index}})">
 
                     <div class="order-label" id="order-number-label">Order Number</div>
                     <div class="order-detail">{{number}}</div>
@@ -64,12 +64,16 @@
                     <div class="order-detail">{{progress}}</div>
 
                 </div>
+
+                <form id="{{@index}}" action="order" method="post">
+                    <input type="hidden" name="order_id" value="{{id}}">
+                </form>
             {{/each}}
             
 
             
         </main>
 
-
+        <script src="orders-admin.js"></script>
     </body>
 </html>

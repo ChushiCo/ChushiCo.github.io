@@ -44,27 +44,27 @@ hbs.registerHelper('if_equal', function(a, b, opts) {
 
 app.get("/", (req, res)=>{
     
-    // if(!req.session.tracker){
-    //     req.session.tracker = []
-    // }
+    if(!req.session.tracker){
+        req.session.tracker = []
+    }
 
-    // if(req.session.email){
-    //     //user already signed in
-    //     if(login == 1){
-    //         res.render("home-user.hbs")
-    //     }
-    //     else if(login == 100){
-    //         res.render("home-admin.hbs")
-    //     }
-    // }
+    if(req.session.email){
+        //user already signed in
+        if(login == 1){
+            res.render("home-user.hbs")
+        }
+        else if(login == 100){
+            res.render("home-admin.hbs")
+        }
+    }
 
-    // else{
-    //     // the user has not registered or logged
-    //     res.render("index.hbs")
+    else{
+        // the user has not registered or logged
+        res.render("index.hbs")
     
-    // }
+    }
 
-    res.render("home-admin.hbs")
+    // res.render("home-admin.hbs")
 })
 
 app.post("/register", urlencoder, (req,res)=>{
@@ -125,8 +125,6 @@ app.post("/login", urlencoder, (req,res)=>{
                 
                 if(doc.data().role == "Admin"){
                     login=100;
-                    // console.log(doc.data().email)
-                    // console.log(doc.data().password)
                 }
                 else{
                     login=1;
@@ -165,21 +163,21 @@ app.get("/home", (req, res)=>{
 
 app.get("/catalog", (req, res)=>{
 
-    // if(req.session.email){
-    //     //user already signed in
-    //     if(login == 1){
-    //         res.render("products-user.hbs")
-    //     }
-    //     else if(login == 100){
-    //         res.render("products-admin.hbs")
-    //     }
-    // }
+    if(req.session.email){
+        //user already signed in
+        if(login == 1){
+            res.render("products-user.hbs")
+        }
+        else if(login == 100){
+            res.render("products-admin.hbs")
+        }
+    }
     
-    // else{
-    //     res.render("products.hbs")
-    // }
+    else{
+        res.render("products.hbs")
+    }
 
-    res.render("products-admin.hbs")
+    // res.render("products-admin.hbs")
     
 })
 
@@ -202,27 +200,27 @@ app.post("/filter", urlencoder, (req, res)=>{
     let filter = req.body.filter
     // console.log(filter)
 
-    // if(req.session.email){
-    //     if(login == 1){
-    //         console.log("FILTER" +login)
-    //         res.render("filter-user.hbs", {
-    //             filter:filter
-    //         })
-    //     }
-    //     else if(login == 100){
-    //         // res.render("home-admin.hbs")
-    //     }
-    // }
+    if(req.session.email){
+        if(login == 1){
+            console.log("FILTER" +login)
+            res.render("filter-user.hbs", {
+                filter:filter
+            })
+        }
+        else if(login == 100){
+            // res.render("home-admin.hbs")
+        }
+    }
     
-    // else{
-    //     res.render("filter.hbs", {
-    //         filter:filter
-    //     })
-    // }  
+    else{
+        res.render("filter.hbs", {
+            filter:filter
+        })
+    }  
 
-    res.render("filter-admin.hbs", {
-        filter:filter
-    })
+    // res.render("filter-admin.hbs", {
+    //     filter:filter
+    // })
 
 })
 
@@ -686,24 +684,6 @@ app.get("/deleteuser", (req, res)=>{
 
 app.get("/inventory", (req, res)=>{
     res.render("inventory-admin.hbs")
-    // let inventory=[]
-    // if (login == 100){
-    //     db.collection("inventory").get().then((snapshot)=>{
-    //         snapshot.forEach((doc)=>{
-    //             inventory.push({
-    //                 name: doc.data().name,
-    //                 quantity: doc.data().quantity
-    //             })
-    //         })
-    //         res.render("inventory-admin.hbs",{
-    //             inventory:inventory
-    //         })
-
-    //     })
-    //     ,(err)=>{
-    //         console.log(err)
-    //     }
-    // }
 })
 
 app.get("/addinventorypage", (req, res)=>{
@@ -729,17 +709,14 @@ app.get("/orders",(req,res)=>{
                 address:doc.data().address,
                 payment: parseFloat(doc.data().payment),
                 method:doc.data().method,
-                progress:doc.data().progress
+                progress:doc.data().progress,
+                id: doc.id
                 
             })
             quantity++
         }, (err)=>{
             console.log("Error is" +err)
         })
-        
-        // for(let i=0; i< orders.length+1; i++){
-        //     console.log(i)
-        // }
 
         res.render("orders-admin.hbs",{
             orders:orders,
@@ -747,6 +724,34 @@ app.get("/orders",(req,res)=>{
         })
     })
 
+})
+
+app.post("/order", urlencoder, (req, res)=>{
+
+    let order = []
+    db.collection("orders").get().then((snapshot)=>{
+        snapshot.forEach((doc)=>{
+            if(doc.id == req.body.order_id){
+                order = {
+                    number:doc.data().number,
+                    time:doc.data().time,
+                    ordered_by:doc.data().ordered_by,
+                    order:doc.data().order,
+                    address:doc.data().address,
+                    payment: parseFloat(doc.data().payment),
+                    method:doc.data().method,
+                    progress:doc.data().progress,
+                    id: doc.id
+                }
+            }
+        }, (err)=>{
+            console.log("Error is" +err)
+        })
+
+        res.render("detail-order-admin.hbs",{
+            order:order
+        })
+    })
 })
 
 
