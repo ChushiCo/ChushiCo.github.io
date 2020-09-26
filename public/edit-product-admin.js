@@ -12,45 +12,41 @@
 var defaultProject = firebase.initializeApp(firebaseConfig);
 
 var db = firebase.firestore(); 
-
   
 let file = {};
 function chooseFile(e){
     file = e.target.files[0];
 }
-var addBtn = document.getElementById('add-btn');
-var submitForm = document.getElementById('add-product-form');
+var editBtn = document.getElementById('edit-btn');
+var editForm = document.getElementById('edit-product-form');
 
-addBtn.addEventListener('click', function(e){
-  let inputForm = document.getElementById('add-form');
+editBtn.addEventListener('click', function(e){
+  let inputForm = document.getElementById('edit-form');
+  
   e.preventDefault();
-  console.log("CLICK")
-
-  db.collection("products").add({
-      name: inputForm.product_name.value,
-      description: inputForm.product_description.value,
-      ingredients: inputForm.product_ingredients.value,
-      orders: parseInt(0),
-      price6x6: parseInt(inputForm.product_6x6.value),
-      price7x8: parseInt(inputForm.product_7x8.value),
-      price10x12: parseInt(inputForm.product_10x12.value)
+  console.log("EDIT BUTTON")
+  console.log(editForm.product_id.value)
+  console.log(inputForm.product_name.value)
+  console.log(inputForm.product_description.value)
+  console.log(inputForm.product_ingredients.value)
+  console.log(inputForm.product_price6x6.value)
+  console.log(inputForm.product_price7x8.value)
+  console.log(file)
+  
+  db.collection("products").doc(editForm.product_id.value).update({
+    name: inputForm.product_name.value,
+    description: inputForm.product_description.value,
+    ingredients: inputForm.product_ingredients.value,
+    price6x6: parseInt(inputForm.product_price6x6.value),
+    price7x8: parseInt(inputForm.product_price7x8.value),
+    price10x12: parseInt(inputForm.product_price10x12.value)
+    
   }).then(function(doc) {
-      console.log("Document written with UID: ", doc.id);
-      let img = doc.id
-      img = 'products/'+img+'.jpg'
-
-      firebase.storage().ref(img).put(file).then(function(){
-        console.log("successfully uploaded") 
-        submitForm.submit();
-      }).catch(error => { 
-        console.log(error.message)
-      })
-
-  })
-  .catch(function(error) {
-      console.error("Error adding document: ", error);
+    console.log("Document updated with UID: ", editForm.product_id.value);
+    editForm.submit();
+    }).catch(function(error) {
+    console.error("Error editing document: ", error);
   });
-
      
 });
 

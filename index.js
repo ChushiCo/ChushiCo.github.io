@@ -625,26 +625,22 @@ app.post("/editproductpage", urlencoder, (req, res)=>{
                     ingredients: doc.data().ingredients,
                     price6x6: parseFloat(doc.data().price6x6),
                     price7x8: parseFloat(doc.data().price7x8),
-                    price10x12: parseFloat(doc.data().price10x12)
+                    price10x12: parseFloat(doc.data().price10x12),
+                    id: req.body.edit_id
                 }
             }
 
         }, (err)=>{
             console.log("Error is" +err)
         })
+        // console.log(req.session.product)
         res.render("edit-product-admin.hbs", {
             product: req.session.product
         })
     }); 
 })
 
-app.post("/editproduct", urlencoder, (req, res)=>{
-    console.log(req.body.product_name)
-    console.log(req.body.product_description)
-    console.log(req.body.product_ingredients)
-    console.log(req.body.product_price6x6)
-    console.log(req.body.product_price7x8)
-    console.log(req.body.product_price10x12)
+app.get("/editproduct", (req,res)=>{
     res.render("products-admin.hbs")
 })
 

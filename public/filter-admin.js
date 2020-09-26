@@ -15,6 +15,7 @@ var db = firebase.firestore();
 
 // FOR NEW
 db.collection("products").get().then((snapshot) => {
+  let x=1
   snapshot.forEach((doc) => {
 
     let object = doc.data();
@@ -28,11 +29,15 @@ db.collection("products").get().then((snapshot) => {
       <div>${doc.data().name}</div>
       <div class="product-line"></div>
       <div>₱  ${parseFloat(doc.data().price6x6).toFixed(2)} to ${parseFloat(doc.data().price10x12).toFixed(2)}</div>
-      <svg class="edit-product" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
-      <svg class="delete-product" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
-    </div>`;  
-    // console.log(doc.data());
+      <svg onclick="editProduct('${x}')" class="edit-product" id="${doc.id}" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+      <svg class="delete-product" id="${doc.id}" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+    </div>
     
+    <form id="${x}" action="editproductpage" method="post" style="display:none">
+      <input type="hidden" name="edit_id" value="${doc.id}">
+    </form>`;  
+    // console.log(doc.data());
+    x++
 
     firebase.auth().onAuthStateChanged(user => {
       if(user){
@@ -56,6 +61,7 @@ db.collection("products").get().then((snapshot) => {
 
 // FOR POPULAR
 db.collection("products").orderBy("orders","desc").get().then((snapshot) => {
+  let x=1
   snapshot.forEach((doc) => {
 
     let object = doc.data();
@@ -67,10 +73,14 @@ db.collection("products").orderBy("orders","desc").get().then((snapshot) => {
       <div>${doc.data().name}</div>
       <div class="product-line"></div>
       <div>₱  ${parseFloat(doc.data().price6x6).toFixed(2)} to ${parseFloat(doc.data().price10x12).toFixed(2)}</div>
-      <svg class="edit-product" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
-      <svg class="delete-product" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
-    </div>`;  
-    
+      <svg onclick="editProduct('${x}')" class="edit-product" id="${doc.id}" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+      <svg class="delete-product" id="${doc.id}" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+    </div>
+
+    <form id="${x}" action="editproductpage" method="post" style="display:none">
+      <input type="hidden" name="edit_id" value="${doc.id}">
+    </form>`;  
+    x++
 
     firebase.auth().onAuthStateChanged(user => {
       if(user){
@@ -91,6 +101,7 @@ db.collection("products").orderBy("orders","desc").get().then((snapshot) => {
 
 // FOR LOW
 db.collection("products").orderBy("price6x6","asc").get().then((snapshot) => {
+  let x=1
   snapshot.forEach((doc) => {
 
     let object = doc.data();
@@ -102,10 +113,14 @@ db.collection("products").orderBy("price6x6","asc").get().then((snapshot) => {
       <div>${doc.data().name}</div>
       <div class="product-line"></div>
       <div>₱  ${parseFloat(doc.data().price6x6).toFixed(2)} to ${parseFloat(doc.data().price10x12).toFixed(2)}</div>
-      <svg class="edit-product" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
-      <svg class="delete-product" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
-    </div>`;  
+      <svg onclick="editProduct('${x}')" class="edit-product" id="${doc.id}" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+      <svg class="delete-product" id="${doc.id}" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+    </div>
     
+    <form id="${x}" action="editproductpage" method="post" style="display:none">
+      <input type="hidden" name="edit_id" value="${doc.id}">
+    </form>`;  
+    x++
 
     firebase.auth().onAuthStateChanged(user => {
       if(user){
@@ -126,6 +141,7 @@ db.collection("products").orderBy("price6x6","asc").get().then((snapshot) => {
 
 // FOR HIGH
 db.collection("products").orderBy("price10x12","desc").get().then((snapshot) => {
+  let x=1
     snapshot.forEach((doc) => {
   
       let object = doc.data();
@@ -137,10 +153,14 @@ db.collection("products").orderBy("price10x12","desc").get().then((snapshot) => 
         <div>${doc.data().name}</div>
         <div class="product-line"></div>
         <div>₱  ${parseFloat(doc.data().price6x6).toFixed(2)} to ${parseFloat(doc.data().price10x12).toFixed(2)}</div>
-        <svg class="edit-product" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
-      <svg class="delete-product" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
-      </div>`;  
-      
+        <svg onclick="editProduct('${x}')" class="edit-product" id="${doc.id}" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+        <svg class="delete-product" id="${doc.id}" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+      </div>
+    
+      <form id="${x}" action="editproductpage" method="post" style="display:none">
+        <input type="hidden" name="edit_id" value="${doc.id}">
+      </form>`;  
+      x++
   
       firebase.auth().onAuthStateChanged(user => {
         if(user){
@@ -161,6 +181,7 @@ db.collection("products").orderBy("price10x12","desc").get().then((snapshot) => 
 
 // FOR 6x6
 db.collection("products").orderBy("price10x12","desc").get().then((snapshot) => {
+  let x=1
     snapshot.forEach((doc) => {
   
       let object = doc.data();
@@ -172,10 +193,14 @@ db.collection("products").orderBy("price10x12","desc").get().then((snapshot) => 
         <div>${doc.data().name}</div>
         <div class="product-line"></div>
         <div>₱  ${parseFloat(doc.data().price6x6).toFixed(2)}</div>
-        <svg class="edit-product" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
-      <svg class="delete-product" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
-      </div>`;  
-      
+        <svg onclick="editProduct('${x}')" class="edit-product" id="${doc.id}" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+        <svg class="delete-product" id="${doc.id}" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+      </div>
+    
+      <form id="${x}" action="editproductpage" method="post" style="display:none">
+        <input type="hidden" name="edit_id" value="${doc.id}">
+      </form>`;  
+      x++
   
       firebase.auth().onAuthStateChanged(user => {
         if(user){
@@ -197,6 +222,7 @@ db.collection("products").orderBy("price10x12","desc").get().then((snapshot) => 
 
 // FOR 7x8
 db.collection("products").orderBy("price10x12","desc").get().then((snapshot) => {
+  let x=1
     snapshot.forEach((doc) => {
   
       let object = doc.data();
@@ -208,10 +234,14 @@ db.collection("products").orderBy("price10x12","desc").get().then((snapshot) => 
         <div>${doc.data().name}</div>
         <div class="product-line"></div>
         <div>₱  ${parseFloat(doc.data().price7x8).toFixed(2)}</div>
-        <svg class="edit-product" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
-      <svg class="delete-product" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
-      </div>`;  
-      
+        <svg onclick="editProduct('${x}')" class="edit-product" id="${doc.id}" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+        <svg class="delete-product" id="${doc.id}" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+      </div>
+    
+      <form id="${x}" action="editproductpage" method="post" style="display:none">
+        <input type="hidden" name="edit_id" value="${doc.id}">
+      </form>`;  
+      x++
   
       firebase.auth().onAuthStateChanged(user => {
         if(user){
@@ -232,6 +262,7 @@ db.collection("products").orderBy("price10x12","desc").get().then((snapshot) => 
 
   // FOR 10x12
 db.collection("products").orderBy("price10x12","desc").get().then((snapshot) => {
+  let x=1
     snapshot.forEach((doc) => {
   
       let object = doc.data();
@@ -243,10 +274,14 @@ db.collection("products").orderBy("price10x12","desc").get().then((snapshot) => 
         <div>${doc.data().name}</div>
         <div class="product-line"></div>
         <div>₱  ${parseFloat(doc.data().price10x12).toFixed(2)}</div>
-        <svg class="edit-product" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
-      <svg class="delete-product" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
-      </div>`;  
-      
+        <svg onclick="editProduct('${x}')" class="edit-product" id="${doc.id}" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+        <svg class="delete-product" id="${doc.id}" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+      </div>
+    
+      <form id="${x}" action="editproductpage" method="post" style="display:none">
+        <input type="hidden" name="edit_id" value="${doc.id}">
+      </form>`;  
+      x++
   
       firebase.auth().onAuthStateChanged(user => {
         if(user){
@@ -541,14 +576,23 @@ $(document).ready(function(){
 
 })
 
+// FOR EDIT PRODUCT
+function editProduct(id){
+
+  $(document).ready(function(){
+      console.log("form#"+id)
+      $("form#"+id).submit()
+  })
+}
+
 // FOR ADD TO CART
 function addToCart(){
-  $(document).ready(function(){
-    console.log($("quantity6x6-user").val())
-    console.log($("quantity7x8-user").val())
-    console.log($("quantity10x12-user").val())
-    $("form#quantitiy-cart").submit()  
-  })
+  // $(document).ready(function(){
+  //   console.log($("quantity6x6-user").val())
+  //   console.log($("quantity7x8-user").val())
+  //   console.log($("quantity10x12-user").val())
+  //   $("form#quantitiy-cart").submit()  
+  // })
 
 }
 
